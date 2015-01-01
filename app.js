@@ -1,60 +1,108 @@
-var express = require('express');
-var path = require('path');
-var favicon = require('serve-favicon');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
+'use strict';
 
-var routes = require('./routes/index');
-var users = require('./routes/users');
+var express = require('express');
+var bodyParser = require('body-parser');
+var fs = require('fs');
+var morgan = require('morgan');
+var multer = require('multer');
+var _ = require('lodash');
+var dbConfig = require('./config/db-config');
 
 var app = express();
 
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+var knex = require('knex')(dbConfig);
+var bookshelf = require('bookshelf')(knex);
 
-// uncomment after placing your favicon in /public
-//app.use(favicon(__dirname + '/public/favicon.ico'));
-app.use(logger('dev'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.set('bookshelf', bookshelf);
 
-app.use('/', routes);
-app.use('/users', users);
+var allowCrossDomain = function(req, res, next) {
+  res.header('Access-Control-Allow-Origin', '*');
+  next();
+};
 
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-    var err = new Error('Not Found');
-    err.status = 404;
-    next(err);
+app.use(allowCrossDomain);
+
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json({type: 'application/vnd.api+json'}));
+app.use(multer());
+
+// For use in other modules
+//var bookshelf = app.get('bookshelf');
+
+var SetInfo = bookshelf.Model.extend({
+  tableName: 'SetInfo',
+  idAttribute: 'id'
 });
 
-// error handlers
-
-// development error handler
-// will print stacktrace
-if (app.get('env') === 'development') {
-    app.use(function(err, req, res, next) {
-        res.status(err.status || 500);
-        res.render('error', {
-            message: err.message,
-            error: err
-        });
-    });
-}
-
-// production error handler
-// no stacktraces leaked to user
-app.use(function(err, req, res, next) {
-    res.status(err.status || 500);
-    res.render('error', {
-        message: err.message,
-        error: {}
-    });
+var CardInfo = bookshelf.Model.extend({
+  tableName: 'CardInfo',
+  idAttribute: 'id'
 });
 
+// Setup the logger
+var accessLogStream = fs.createWriteStream(__dirname + '/access.log', {flags: 'a'});
+app.use(morgan('combined', {stream: accessLogStream}));
 
-module.exports = app;
+// Router
+var router = express.Router();
+
+router.get('/', function(req, res) {
+  res.send('mtg-stats api up and running');
+});
+
+router.get('/set/', function(req, res) {
+  var setCode = req.query.setCode;
+  if (_.isUndefined(setCode)) {
+    new SetInfo()
+      .fetchAll()
+      .then(function(sets) {
+        res.send(sets.toJSON());
+      }).catch(function(error) {
+        console.log(error);
+        res.send('An error occured');
+      });
+  } else {
+    new SetInfo()
+      .where('Code', setCode)
+      .fetch()
+      .then(function(setInfo) {
+        res.send(setInfo.toJSON());
+      }).catch(function(error) {
+        console.log(error);
+        res.send('Error retrieving set');
+      });
+  }
+
+});
+
+router.get('/card/', function(req, res) {
+  var name = req.query.name;
+  console.log(req.query.name);
+  if (_.isUndefined(name)) {
+    new CardInfo()
+      .fetchAll({columns: ['Name', 'MultiverseId']})
+      .then(function(cardInfo) {
+        res.send(cardInfo.toJSON());
+      }).catch(function(error) {
+        console.log(error);
+        res.send('Error retrieving all cards');
+      });
+  } else {
+    new CardInfo()
+      .where('Name', name)
+      .fetch()
+      .then(function(cardInfo) {
+        res.send(cardInfo.toJSON());
+      }).catch(function(error) {
+        console.log(error);
+        res.send('Error retrieving card');
+      });
+  }
+});
+
+app.use('/api', router);
+
+var port = process.env.PORT || 3000;
+
+app.listen(port);
+console.log('Magic happens on port ' + port);
