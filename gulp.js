@@ -5,7 +5,6 @@
 var gulp = require('gulp');
 var del = require('del');
 var less = require('gulp-less');
-var webserver = require('gulp-webserver');
 
 //---------------------------------------------------------------------------//
 // Compilation Tasks
