@@ -17,7 +17,12 @@
   },
   "description": "API for mtg-stats",
   "main": "app.js",
-  "devDependencies": {},
+  "devDependencies": {
+    "bower": "^1.3.12",
+    "del": "^1.1.1",
+    "gulp": "^3.8.10",
+    "gulp-less": "^2.0.1"
+  },
   "repository": {
     "type": "git",
     "url": "server.mtg-stats"
