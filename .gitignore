@@ -7,3 +7,4 @@ access.log
 bower_components
 data
 config
+config/db-config.bookshelf.js
