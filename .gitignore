@@ -6,4 +6,5 @@ npm-debug.log
 access.log
 bower_components
 data
+
 config/db-config.bookshelf.js
