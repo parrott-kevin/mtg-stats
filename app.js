@@ -1,33 +1,33 @@
 'use strict';
 
-var express = require('express');
+// Requires
 var bodyParser = require('body-parser');
 var fs = require('fs');
-var morgan = require('morgan');
-var multer = require('multer');
 var _ = require('lodash');
-var dbConfig = require('./config/db-config');
+var path = require('path');
 
+// Express setup
+var express = require('express');
 var app = express();
 
-var knex = require('knex')(dbConfig);
-var bookshelf = require('bookshelf')(knex);
+app.use('/', express.static(path.join(__dirname, 'public')));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
 
-app.set('bookshelf', bookshelf);
 
 var allowCrossDomain = function(req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');
   next();
 };
-
 app.use(allowCrossDomain);
 
-app.use(bodyParser.urlencoded({extended: true}));
-app.use(bodyParser.json({type: 'application/vnd.api+json'}));
-app.use(multer());
+// Bookshelf setup
+var dbConfig = require('./config/db-config.bookshelf');
 
-// For use in other modules
-//var bookshelf = app.get('bookshelf');
+var knex = require('knex')(dbConfig);
+var bookshelf = require('bookshelf')(knex);
+
+app.set('bookshelf', bookshelf);
 
 var SetInfo = bookshelf.Model.extend({
   tableName: 'SetInfo',
@@ -38,10 +38,6 @@ var CardInfo = bookshelf.Model.extend({
   tableName: 'CardInfo',
   idAttribute: 'id'
 });
-
-// Setup the logger
-var accessLogStream = fs.createWriteStream(__dirname + '/access.log', {flags: 'a'});
-app.use(morgan('combined', {stream: accessLogStream}));
 
 // Router
 var router = express.Router();
@@ -77,11 +73,11 @@ router.get('/set/', function(req, res) {
 
 router.get('/card/', function(req, res) {
   var name = req.query.name;
-  console.log(req.query.name);
   if (_.isUndefined(name)) {
     new CardInfo()
       .fetchAll({columns: ['Name', 'MultiverseId']})
       .then(function(cardInfo) {
+        console.log('send CardInfo');
         res.send(cardInfo.toJSON());
       }).catch(function(error) {
         console.log(error);
@@ -92,6 +88,7 @@ router.get('/card/', function(req, res) {
       .where('Name', name)
       .fetch()
       .then(function(cardInfo) {
+        console.log('sending specific card');
         res.send(cardInfo.toJSON());
       }).catch(function(error) {
         console.log(error);
@@ -105,4 +102,4 @@ app.use('/api', router);
 var port = process.env.PORT || 3000;
 
 app.listen(port);
-console.log('Magic happens on port ' + port);
+console.log('Server started on http://localhost:' + port);

@@ -14,9 +14,9 @@ var less = require('gulp-less');
 gulp.task('dev', [
     'clean:dev',
     'styles',
-    'fonts:dev',
-    'webserver:dev',
-    'watch'
+    'fonts:dev'
+    //'webserver:dev',
+    //'watch'
   ], function() {}
 );
 
@@ -26,14 +26,14 @@ gulp.task('dev', [
 
 // Styles task
 gulp.task('styles', function() {
-  gulp.src('src/assets/less/styles.less')
+  gulp.src('./public/assets/less/styles.less')
     .pipe(less())
-    .pipe(gulp.dest('src/assets/css'));
+    .pipe(gulp.dest('./public/assets/css'));
 });
 
 // Watch less files for changes
 gulp.task('watch', function() {
-  gulp.watch(['src/assets/less/*.less'], ['styles']);
+  gulp.watch(['public/assets/less/*.less'], ['styles']);
 });
 
 //---------------------------------------------------------------------------//
@@ -42,7 +42,7 @@ gulp.task('watch', function() {
 
 // Clean task for dev
 gulp.task('clean:dev', function() {
-  del.sync(['src/assets/css/*', 'src/assets/fonts/*']);
+  del.sync(['public/assets/css/*', 'public/assets/fonts/*']);
 });
 
 // Copy fonts for dev
@@ -51,7 +51,7 @@ gulp.task('fonts:dev', function() {
     'bower_components/bootstrap/fonts/*',
     'bower_components/fontawesome/fonts/*'
   ])
-    .pipe(gulp.dest('src/assets/fonts'));
+    .pipe(gulp.dest('public/assets/fonts'));
 });
 
 // Start webserver for dev
@@ -62,4 +62,3 @@ gulp.task('webserver:dev', function() {
       open: 'src'
     }));
 });
-

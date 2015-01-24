@@ -1,5 +1,5 @@
 {
-  "name": "server.mtg-stats",
+  "name": "mtg-stats",
   "version": "0.0.0",
   "private": true,
   "scripts": {},
@@ -11,8 +11,6 @@
     "express": "^4.10.6",
     "knex": "^0.7.3",
     "lodash": "^2.4.1",
-    "morgan": "^1.5.0",
-    "multer": "^0.1.6",
     "mysql": "^2.5.4"
   },
   "description": "API for mtg-stats",
@@ -25,7 +23,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "server.mtg-stats"
+    "url": "mtg-stats"
   },
   "author": "Kevin Parrott",
   "license": "MIT"

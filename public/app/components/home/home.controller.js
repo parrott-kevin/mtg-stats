@@ -2,23 +2,31 @@
  *
  * Created by parrott-kevin on 1/8/15.
  */
-
 (function() {
-  "use strict";
+  'use strict';
 
   angular
-    .module('home.controller', [])
+    .module('home.controller', ['ui.bootstrap'])
     .controller('HomeController', HomeController);
 
-  HomeController.$inject = [];
+  HomeController.$inject = ['fetchCard', '_', '$scope'];
 
-  function HomeController() {
+  function HomeController(fetchCard, _) {
     var vm = this;
-  }
 
-  HomeController.resolve = {
-    cards:
-  }
+    if (_.isUndefined(vm.cardNameIdObj)) {
+      fetchCard.getCardNameId().then(function(d) {
+        vm.cardNameIdObj = angular.fromJson(d.data);
+      });
+    }
 
+    vm.submit = function() {
+      if (vm.card) {
+        var mtgImage = 'http://mtgimage.com/multiverseid/';
+        vm.imgsrc = mtgImage + vm.card.MultiverseId + '.jpg';
+      }
+    };
+
+  }
 
 })();
