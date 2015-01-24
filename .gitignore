@@ -5,6 +5,5 @@ npm-debug.log
 .DS_Store
 access.log
 config
-db-config.bookshelf.js
 bower_components
 data
