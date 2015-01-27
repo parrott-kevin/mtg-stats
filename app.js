@@ -1,3 +1,8 @@
+/**
+ *
+ * Created by parrott-kevin on 1/26/15.
+ */
+
 'use strict';
 
 // Requires
@@ -21,23 +26,16 @@ var allowCrossDomain = function(req, res, next) {
 };
 app.use(allowCrossDomain);
 
-// Bookshelf setup
-var dbConfig = require('./config/db-config.bookshelf');
+// Sequelize setup
+var Sequelize = require('sequelize');
+var dbConfig = require('./config/db-config.sequelize');
+var sequelize = new Sequelize(dbConfig.database, dbConfig.username, dbConfig.password);
 
-var knex = require('knex')(dbConfig);
-var bookshelf = require('bookshelf')(knex);
+var setConfig = require('./models/set');
+var SetInfo = sequelize.define('SetInfo', setConfig.fields, setConfig.table);
 
-app.set('bookshelf', bookshelf);
-
-var SetInfo = bookshelf.Model.extend({
-  tableName: 'SetInfo',
-  idAttribute: 'id'
-});
-
-var CardInfo = bookshelf.Model.extend({
-  tableName: 'CardInfo',
-  idAttribute: 'id'
-});
+var cardConfig = require('./models/card');
+var CardInfo = sequelize.define('CardInfo', cardConfig.fields, cardConfig.table);
 
 // Router
 var router = express.Router();
@@ -46,53 +44,51 @@ router.get('/', function(req, res) {
   res.send('mtg-stats api up and running');
 });
 
-router.get('/set/', function(req, res) {
-  var setCode = req.query.setCode;
-  if (_.isUndefined(setCode)) {
-    new SetInfo()
-      .fetchAll()
-      .then(function(sets) {
-        res.send(sets.toJSON());
-      }).catch(function(error) {
-        console.log(error);
-        res.send('An error occured');
-      });
-  } else {
-    new SetInfo()
-      .where('Code', setCode)
-      .fetch()
-      .then(function(setInfo) {
-        res.send(setInfo.toJSON());
-      }).catch(function(error) {
-        console.log(error);
-        res.send('Error retrieving set');
-      });
-  }
-
-});
-
 router.get('/card/', function(req, res) {
   var name = req.query.name;
+  CardInfo.belongsTo(SetInfo, {foreignKey: 'SetInfoId'});
+  sequelize.sync().done(function() {
+    if (_.isUndefined(name)) {
+      CardInfo.findAll({
+        attributes: ['name', 'multiverseId']
+        //include: [{
+        //  model: SetInfo,
+        //  attributes: ['name']
+        //}]
+      })
+        .then(function(data) {
+          res.send(data);
+        })
+        .catch(function(error) {
+          res.send('Error retrieving card name and mid');
+          console.log(error);
+        });
+    } else {
+      CardInfo.find({
+        where: {name: name},
+        include: [SetInfo]
+      })
+        .then(function(cardInfo) {
+          res.send(cardInfo);
+        }).catch(function(error) {
+          res.send('Error retrieving card');
+          console.log(error);
+        });
+    }
+  });
+});
+
+router.get('/set/', function(req, res) {
+  var name = req.query.name;
   if (_.isUndefined(name)) {
-    new CardInfo()
-      .fetchAll({columns: ['Name', 'MultiverseId']})
-      .then(function(cardInfo) {
-        console.log('send CardInfo');
-        res.send(cardInfo.toJSON());
-      }).catch(function(error) {
+    SetInfo.findAll({
+      include: ['CardInfo']
+      })
+      .then(function(data) {
+        res.send(data);
+      })
+      .catch(function(error) {
         console.log(error);
-        res.send('Error retrieving all cards');
-      });
-  } else {
-    new CardInfo()
-      .where('Name', name)
-      .fetch()
-      .then(function(cardInfo) {
-        console.log('sending specific card');
-        res.send(cardInfo.toJSON());
-      }).catch(function(error) {
-        console.log(error);
-        res.send('Error retrieving card');
       });
   }
 });

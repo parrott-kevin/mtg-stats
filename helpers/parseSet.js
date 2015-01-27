@@ -7,13 +7,15 @@ var fs = require('fs');
 var os = require('os');
 var _ = require('lodash');
 
-var parseFilePath = '../../mtg-json/AllSetsArray.json';
+var parseFilePath = '../data/mtg-json/AllSetsArray.json';
 var fileKeys = ['name', 'code', 'gathererCode', 'oldCode', 'releaseDate', 'border', 'type', 'block', 'onlineOnly'];
-var parsedFilePath = '../../mtg-json/sets.csv';
-
+var parsedFilePath = '../data/mtg-json/sets.csv';
 
 var parseFile = JSON.parse(fs.readFileSync(parseFilePath));
-var sets = '';
+var sets = '|';
+sets += _.reduce(fileKeys, function(i, j) {
+  return i + '|,|' + j;
+});
 
 _.forEach(parseFile, function(selectedSet) {
   var line = '|';

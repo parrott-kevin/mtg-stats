@@ -7,9 +7,9 @@ var fs = require('fs');
 var os = require('os');
 var _ = require('lodash');
 
-var parseFilePath = '../../mtg-json/AllSetsArray.json';
+var parseFilePath = '../data/mtg-json/AllSetsArray.json';
 var fileKeys = ['layout', 'name', 'manaCost', 'cmc', 'type', 'rarity', 'text', 'flavor', 'artist', 'number', 'power', 'toughness', 'loyalty', 'multiverseid', 'imageName', 'watermark', 'border', 'timeshifted', 'reserved'];
-var parsedFilePath = '../../mtg-json/cards.csv';
+var parsedFilePath = '../data/mtg-json/cards.csv';
 
 var parseFile = JSON.parse(fs.readFileSync(parseFilePath));
 

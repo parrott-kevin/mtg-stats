@@ -23,7 +23,10 @@
     vm.submit = function() {
       if (vm.card) {
         var mtgImage = 'http://mtgimage.com/multiverseid/';
-        vm.imgsrc = mtgImage + vm.card.MultiverseId + '.jpg';
+        vm.imgsrc = mtgImage + vm.card.multiverseId + '.jpg';
+        fetchCard.getCardInfo(vm.card.name).then(function(d) {
+          vm.cardInfo = angular.fromJson(d.data);
+        });
       }
     };
 

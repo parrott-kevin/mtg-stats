@@ -6,12 +6,11 @@
   "dependencies": {
     "bluebird": "^2.5.3",
     "body-parser": "^1.10.0",
-    "bookshelf": "^0.7.9",
     "debug": "^2.1.1",
     "express": "^4.10.6",
-    "knex": "^0.7.3",
     "lodash": "^2.4.1",
-    "mysql": "^2.5.4"
+    "mysql": "^2.5.4",
+    "sequelize": "^2.0.0-rc8"
   },
   "description": "API for mtg-stats",
   "main": "app.js",

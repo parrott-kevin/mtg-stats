@@ -13,11 +13,23 @@
   function fetchCard($http) {
     return {
       getCardNameId: function() {
-        var promise = $http.get('/api/card').success(function(data) {
+        return $http({
+          url: '/api/card/',
+          method: 'GET'
+        }).success(function(data) {
           return data;
         });
 
-        return promise;
+      },
+      getCardInfo: function(cardName) {
+        return $http({
+          url: '/api/card/',
+          method: 'GET',
+          params: {name: cardName}
+        }).success(function(data) {
+          return data;
+        });
+
       }
     };
   }

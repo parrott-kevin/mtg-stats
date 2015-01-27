@@ -1,9 +1,7 @@
 # Created by .ignore support plugin (hsz.mobi)
 node_modules
-.idea
-npm-debug.log
-.DS_Store
-access.log
 bower_components
+.idea
 data
-config/db-config.bookshelf.js
+config
+.DS_*
