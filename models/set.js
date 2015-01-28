@@ -13,39 +13,39 @@ var setInfo = {
       primaryKey: true,
       autoIncrement: true
     },
-    name: {
+    Name: {
       field: 'Name',
       type: Sequelize.STRING
     },
-    code: {
+    Code: {
       field: 'Code',
       type: Sequelize.STRING
     },
-    gathererCode: {
+    GathererCode: {
       field: 'GathererCode',
       type: Sequelize.STRING
     },
-    oldCode: {
+    OldCode: {
       field: 'OldCode',
       type: Sequelize.STRING
     },
-    releaseDate: {
+    ReleaseDate: {
       field: 'ReleaseDate',
       type: Sequelize.DATE
     },
-    border: {
+    Border: {
       field: 'Border',
       type: Sequelize.STRING
     },
-    setType: {
+    SetType: {
       field: 'SetType',
       type: Sequelize.STRING
     },
-    block: {
+    Block: {
       field: 'Block',
       type: Sequelize.STRING
     },
-    onlineOnly: {
+    OnlineOnly: {
       field: 'OnlineOnly',
       type: Sequelize.BOOLEAN
     }

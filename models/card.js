@@ -13,83 +13,83 @@ var card = {
       primaryKey: true,
       autoIncrement: true
     },
-    setInfoId: {
+    SetInfoId: {
       field: 'SetInfoId',
       type: Sequelize.INTEGER
     },
-    layout: {
+    Layout: {
       field: 'Layout',
       type: Sequelize.STRING
     },
-    name: {
+    Name: {
       field: 'Name',
       type: Sequelize.STRING
     },
-    manaCost: {
+    ManaCost: {
       field: 'ManaCost',
       type: Sequelize.STRING
     },
-    cmc: {
+    CMC: {
       field: 'CMC',
       type: Sequelize.DECIMAL(18, 2)
     },
-    type: {
+    Type: {
       field: 'Type',
       type: Sequelize.STRING
     },
-    rarity: {
+    Rarity: {
       field: 'Rarity',
       type: Sequelize.STRING
     },
-    text: {
+    Text: {
       field: 'Text',
       type: Sequelize.TEXT
     },
-    flavor: {
+    Flavor: {
       field: 'Flavor',
       type: Sequelize.TEXT
     },
-    artist: {
+    Artist: {
       field: 'Artist',
       type: Sequelize.STRING
     },
-    number: {
+    Number: {
       field: 'Number',
       type: Sequelize.STRING
     },
-    power: {
+    Power: {
       field: 'Power',
       type: Sequelize.STRING
     },
-    toughness: {
+    Toughness: {
       field: 'Toughness',
       type: Sequelize.STRING
     },
-    loyalty: {
+    Loyalty: {
       field: 'Loyalty',
       type: Sequelize.INTEGER
     },
-    multiverseId: {
+    MultiverseId: {
       field: 'MultiverseId',
       type: Sequelize.STRING
     },
-    imageName: {
+    ImageName: {
       field: 'ImageName',
       type: Sequelize.STRING
     },
-    watermark: {
+    Watermark: {
       field: 'Watermark',
       type: Sequelize.STRING
     },
-    border: {
+    Border: {
       field: 'Border',
       type: Sequelize.STRING
     },
-    timeshifted: {
+    Timeshifted: {
       field: 'Timeshifted',
       type: Sequelize.BOOLEAN
     },
-    reserved: {
+    Reserved: {
       field: 'Reserved',
       type: Sequelize.BOOLEAN
     }

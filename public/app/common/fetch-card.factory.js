@@ -12,24 +12,22 @@
 
   function fetchCard($http) {
     return {
-      getCardNameId: function() {
+      getCardNameIdSet: function() {
         return $http({
           url: '/api/card/',
           method: 'GET'
         }).success(function(data) {
           return data;
         });
-
       },
-      getCardInfo: function(cardName) {
+      getCardInfo: function(id) {
         return $http({
           url: '/api/card/',
           method: 'GET',
-          params: {name: cardName}
+          params: {id: id}
         }).success(function(data) {
           return data;
         });
-
       }
     };
   }

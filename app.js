@@ -29,7 +29,7 @@ app.use(allowCrossDomain);
 // Sequelize setup
 var Sequelize = require('sequelize');
 var dbConfig = require('./config/db-config.sequelize');
-var sequelize = new Sequelize(dbConfig.database, dbConfig.username, dbConfig.password);
+var sequelize = new Sequelize(dbConfig.database, dbConfig.username, dbConfig.password, {logging: false});
 
 var setConfig = require('./models/set');
 var SetInfo = sequelize.define('SetInfo', setConfig.fields, setConfig.table);
@@ -45,35 +45,33 @@ router.get('/', function(req, res) {
 });
 
 router.get('/card/', function(req, res) {
-  var name = req.query.name;
+  var id = req.query.id;
   CardInfo.belongsTo(SetInfo, {foreignKey: 'SetInfoId'});
   sequelize.sync().done(function() {
-    if (_.isUndefined(name)) {
+    if (_.isUndefined(id)) {
       CardInfo.findAll({
-        attributes: ['name', 'multiverseId']
-        //include: [{
-        //  model: SetInfo,
-        //  attributes: ['name']
-        //}]
+        attributes: ['id', 'Name', 'MultiverseId'],
+        include: [{model: SetInfo, attributes: ['Name']}]
       })
-        .then(function(data) {
-          res.send(data);
-        })
-        .catch(function(error) {
-          res.send('Error retrieving card name and mid');
-          console.log(error);
-        });
+      .then(function(data) {
+        console.log('Retrieving cards');
+        res.send(data);
+      })
+      .catch(function(error) {
+        res.send('Error retrieving card name and mid');
+        console.log(error);
+      });
     } else {
       CardInfo.find({
-        where: {name: name},
+        where: {id: id},
         include: [SetInfo]
       })
-        .then(function(cardInfo) {
-          res.send(cardInfo);
-        }).catch(function(error) {
-          res.send('Error retrieving card');
-          console.log(error);
-        });
+      .then(function(cardInfo) {
+        res.send(cardInfo);
+      }).catch(function(error) {
+        res.send('Error retrieving card');
+        console.log(error);
+      });
     }
   });
 });
