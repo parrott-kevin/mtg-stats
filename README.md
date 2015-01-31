@@ -1,1 +1,1 @@
-Rest API for mtg-stats
+Magic the Gathering search, statistics, and deck building application.

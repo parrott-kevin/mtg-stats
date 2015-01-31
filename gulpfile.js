@@ -1,6 +1,7 @@
 /**
  * Created by parrott-kevin on 1/6/15.
  */
+'use strict';
 
 var gulp = require('gulp');
 var del = require('del');
@@ -48,17 +49,8 @@ gulp.task('clean:dev', function() {
 // Copy fonts for dev
 gulp.task('fonts:dev', function() {
   gulp.src([
-    'bower_components/bootstrap/fonts/*',
-    'bower_components/fontawesome/fonts/*'
+    'public/bower_components/bootstrap/fonts/*',
+    'public/bower_components/fontawesome/fonts/*'
   ])
     .pipe(gulp.dest('public/assets/fonts'));
-});
-
-// Start webserver for dev
-gulp.task('webserver:dev', function() {
-  gulp.src('')
-    .pipe(webserver({
-      livereload: true,
-      open: 'src'
-    }));
 });

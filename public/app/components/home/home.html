@@ -1,18 +1,33 @@
 <div class="container">
-  <div class="col-md-6">
-    <h4>Search</h4>
-    <form ng-submit="vm.submit()">
-      <input type="text" ng-model="vm.card" typeahead="card as card.Name for card in vm.cardNameIdSetObj | filter:{Name:$viewValue} | limitTo:8" typeahead-template-url="typeaheadTemplate.html" class="form-control" autofocus="1"/>
-    </form>
-    <pre>{{vm.cardInfo}}</pre>
+  <div class="row">
+    <div class="col-md-12">
+      <h4>Search</h4>
+      <input
+        type="text" ng-model="vm.card"
+        typeahead="card as card.Name for card in vm.cardNameIdSetObj | filter:{Name:$viewValue} | limitTo:8"
+        typeahead-template-url="typeaheadTemplate.html"
+        typeahead-on-select="vm.onSelect()"
+        class="form-control" autofocus="1"
+      />
+    </div>
   </div>
-  <div class="col-md-6 img-responsive">
-    <img class="img-rounded" ng-src={{vm.imgsrc}} />
+  <div class="row top-buffer">
+    <div class="col-md-3">
+      <img class="img-rounded img-responsive" ng-src={{vm.imgsrc}} />
+    </div>
+    <div class="col-md-5">
+      <pre>{{vm.cardInfo}}</pre>
+      {{vm.cardInfo.Name}}
+      {{vm.cardInfo.ManaCost}}
+      {{vm.cardInfo.CMC}}
+      {{vm.cardInfo.Type}}
+    </div>
   </div>
+
 </div>
 <script type="text/ng-template" id="typeaheadTemplate.html">
   <a>
     <span bind-html-unsafe="match.label | typeaheadHighlight: query"></span>
-    | <em>{{match.model.SetInfo.Name}}</em>
+    <span><small>| <em>{{match.model.SetInfo.Name}}</em></small></span>
   </a>
 </script>

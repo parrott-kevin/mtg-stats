@@ -1,7 +1,9 @@
 # Created by .ignore support plugin (hsz.mobi)
 node_modules
-bower_components
+public/bower_components
 .idea
 data
 config
 .DS_*
+public/assets/css
+public/assets/fonts

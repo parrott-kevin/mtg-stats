@@ -9,18 +9,20 @@
     .module('home.controller', ['ui.bootstrap'])
     .controller('HomeController', HomeController);
 
-  HomeController.$inject = ['fetchCard', '_', '$scope', 'a'];
+  HomeController.$inject = ['fetchCard', '_'];
 
-  function HomeController(fetchCard, _, a) {
+  function HomeController(fetchCard, _) {
     var vm = this;
+    vm.card = null;
 
     if (_.isUndefined(vm.cardNameIdSetObj)) {
       fetchCard.getCardNameIdSet().then(function(d) {
         vm.cardNameIdSetObj = angular.fromJson(d.data);
       });
     }
+    vm.imgsrc = 'http://mtgimage.com/card/cardback.jpg';
 
-    vm.submit = function() {
+    vm.onSelect = function() {
       if (vm.card) {
         var mtgImage = 'http://mtgimage.com/';
         if (_.isEmpty(vm.card.MultiverseId)) {
