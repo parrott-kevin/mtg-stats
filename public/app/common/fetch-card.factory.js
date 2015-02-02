@@ -15,7 +15,8 @@
       getCardNameIdSet: function() {
         return $http({
           url: '/api/card/',
-          method: 'GET'
+          method: 'GET',
+          cache: true
         }).success(function(data) {
           return data;
         });

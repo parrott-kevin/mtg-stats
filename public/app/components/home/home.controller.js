@@ -14,12 +14,15 @@
   function HomeController(fetchCard, _) {
     var vm = this;
     vm.card = null;
+    vm.cardAttributes = null;
+    vm.setAttributes = null;
 
     if (_.isUndefined(vm.cardNameIdSetObj)) {
       fetchCard.getCardNameIdSet().then(function(d) {
         vm.cardNameIdSetObj = angular.fromJson(d.data);
       });
     }
+
     vm.imgsrc = 'http://mtgimage.com/card/cardback.jpg';
 
     vm.onSelect = function() {
@@ -32,7 +35,38 @@
         }
         fetchCard.getCardInfo(vm.card.id).then(function(d) {
           vm.cardInfo = angular.fromJson(d.data);
+          vm.setInfo = vm.cardInfo.SetInfo;
         });
+        vm.cardAttributes = [
+          ['ManaCost', 'Mana Cost'],
+          ['CMC'],
+          ['Type'],
+          ['Artist'],
+          ['Border'],
+          ['Flavor'],
+          ['Layout'],
+          ['Loyalty'],
+          ['MultiverseId', 'Multiverse ID'],
+          ['Number', 'Card Number'],
+          ['Power'],
+          ['Rarity'],
+          ['Reserved'],
+          ['Text'],
+          ['Timeshifted'],
+          ['Toughness'],
+          ['Watermark']
+        ];
+        vm.setAttributes = [
+          ['Block'],
+          ['Border'],
+          ['Code', 'Set Code'],
+          ['GathererCode', 'Gatherer Code'],
+          ['Name', 'Set Name'],
+          ['OldCode', 'Old Code'],
+          ['OnlineOnly', 'Online Only'],
+          ['ReleaseDate', 'Release Date'],
+          ['SetType', 'Set Type']
+        ];
       }
     };
 
