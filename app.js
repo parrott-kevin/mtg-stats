@@ -7,7 +7,7 @@
 
 // Requires
 var bodyParser = require('body-parser');
-var fs = require('fs');
+//var fs = require('fs');
 var _ = require('lodash');
 var path = require('path');
 
@@ -18,7 +18,6 @@ var app = express();
 app.use('/', express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
-
 
 var allowCrossDomain = function(req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');
@@ -31,11 +30,11 @@ var Sequelize = require('sequelize');
 var dbConfig = require('./config/db-config.sequelize');
 var sequelize = new Sequelize(dbConfig.database, dbConfig.username, dbConfig.password, {logging: false});
 
-var setConfig = require('./models/set');
-var SetInfo = sequelize.define('SetInfo', setConfig.fields, setConfig.table);
+var setModel = require('./api/models/set');
+var SetModel = sequelize.define('SetModel', setModel.fields, setModel.table);
 
-var cardConfig = require('./models/card');
-var CardInfo = sequelize.define('CardInfo', cardConfig.fields, cardConfig.table);
+var cardModel = require('./api/models/card');
+var CardModel = sequelize.define('CardModel', cardModel.fields, cardModel.table);
 
 // Router
 var router = express.Router();
@@ -46,12 +45,12 @@ router.get('/', function(req, res) {
 
 router.get('/card/', function(req, res) {
   var id = req.query.id;
-  CardInfo.belongsTo(SetInfo, {foreignKey: 'SetInfoId'});
+  CardModel.belongsTo(SetModel, {foreignKey: 'SetInfoId'});
   sequelize.sync().done(function() {
     if (_.isUndefined(id)) {
-      CardInfo.findAll({
+      CardModel.findAll({
         attributes: ['id', 'Name', 'MultiverseId'],
-        include: [{model: SetInfo, attributes: ['Name']}]
+        include: [{model: SetModel, attributes: ['Name']}]
       })
       .then(function(data) {
         console.log('Retrieving cards');
@@ -62,9 +61,9 @@ router.get('/card/', function(req, res) {
         console.log(error);
       });
     } else {
-      CardInfo.find({
+      CardModel.find({
         where: {id: id},
-        include: [SetInfo]
+        include: [SetModel]
       })
       .then(function(cardInfo) {
         res.send(cardInfo);
@@ -79,15 +78,15 @@ router.get('/card/', function(req, res) {
 router.get('/set/', function(req, res) {
   var name = req.query.name;
   if (_.isUndefined(name)) {
-    SetInfo.findAll({
+    SetModel.findAll({
       include: ['CardInfo']
-      })
-      .then(function(data) {
-        res.send(data);
-      })
-      .catch(function(error) {
-        console.log(error);
-      });
+    })
+    .then(function(data) {
+      res.send(data);
+    })
+    .catch(function(error) {
+      console.log(error);
+    });
   }
 });
 

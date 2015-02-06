@@ -35,7 +35,9 @@
         }
         fetchCard.getCardInfo(vm.card.id).then(function(d) {
           vm.cardInfo = angular.fromJson(d.data);
-          vm.setInfo = vm.cardInfo.SetInfo;
+          console.log(vm.cardInfo);
+          vm.setInfo = vm.cardInfo.SetModel;
+          console.log(vm.setInfo);
         });
         vm.cardAttributes = [
           ['ManaCost', 'Mana Cost'],
