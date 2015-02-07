@@ -6,7 +6,7 @@
 'use strict';
 
 module.exports = function(sequelize) {
-  var model = require('../models/set.module')(sequelize);
+  var model = require('../models/set.js')(sequelize);
   var Set = model.Set;
 
   return {

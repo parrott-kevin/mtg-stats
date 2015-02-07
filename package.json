@@ -2,7 +2,9 @@
   "name": "mtg-stats",
   "version": "0.0.0",
   "private": true,
-  "scripts": {},
+  "scripts": {
+    "start": "node ./bin/www"
+  },
   "dependencies": {
     "bluebird": "^2.5.3",
     "body-parser": "^1.10.0",

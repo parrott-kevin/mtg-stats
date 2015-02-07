@@ -4,102 +4,103 @@
  */
 'use strict';
 
-var Sequelize = require('Sequelize');
-
-module.exports = function(sequelize) {
+module.exports = function(sequelize, DataTypes) {
   var Card = sequelize.define('Card', {
       id: {
         field: 'id',
-        type: Sequelize.INTEGER,
+        type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true
       },
       SetInfoId: {
         field: 'SetInfoId',
-        type: Sequelize.INTEGER
+        type: DataTypes.INTEGER
       },
       Layout: {
         field: 'Layout',
-        type: Sequelize.STRING
+        type: DataTypes.STRING
       },
       Name: {
         field: 'Name',
-        type: Sequelize.STRING
+        type: DataTypes.STRING
       },
       ManaCost: {
         field: 'ManaCost',
-        type: Sequelize.STRING
+        type: DataTypes.STRING
       },
       CMC: {
         field: 'CMC',
-        type: Sequelize.DECIMAL(18, 2)
+        type: DataTypes.DECIMAL(18, 2)
       },
       Type: {
         field: 'Type',
-        type: Sequelize.STRING
+        type: DataTypes.STRING
       },
       Rarity: {
         field: 'Rarity',
-        type: Sequelize.STRING
+        type: DataTypes.STRING
       },
       Text: {
         field: 'Text',
-        type: Sequelize.TEXT
+        type: DataTypes.TEXT
       },
       Flavor: {
         field: 'Flavor',
-        type: Sequelize.TEXT
+        type: DataTypes.TEXT
       },
       Artist: {
         field: 'Artist',
-        type: Sequelize.STRING
+        type: DataTypes.STRING
       },
       Number: {
         field: 'Number',
-        type: Sequelize.STRING
+        type: DataTypes.STRING
       },
       Power: {
         field: 'Power',
-        type: Sequelize.STRING
+        type: DataTypes.STRING
       },
       Toughness: {
         field: 'Toughness',
-        type: Sequelize.STRING
+        type: DataTypes.STRING
       },
       Loyalty: {
         field: 'Loyalty',
-        type: Sequelize.INTEGER
+        type: DataTypes.INTEGER
       },
       MultiverseId: {
         field: 'MultiverseId',
-        type: Sequelize.STRING
+        type: DataTypes.STRING
       },
       ImageName: {
         field: 'ImageName',
-        type: Sequelize.STRING
+        type: DataTypes.STRING
       },
       Watermark: {
         field: 'Watermark',
-        type: Sequelize.STRING
+        type: DataTypes.STRING
       },
       Border: {
         field: 'Border',
-        type: Sequelize.STRING
+        type: DataTypes.STRING
       },
       Timeshifted: {
         field: 'Timeshifted',
-        type: Sequelize.BOOLEAN
+        type: DataTypes.BOOLEAN
       },
       Reserved: {
         field: 'Reserved',
-        type: Sequelize.BOOLEAN
+        type: DataTypes.BOOLEAN
       }
-    },
-    {
+    }, {
       tableName: 'CardInfo',
-      timestamps: false
+      timestamps: false,
+      classMethods: {
+        associate: function(models) {
+          Card.belongsTo(models.Set, {foreignKey: 'SetInfoId'});
+        }
+      }
     });
-  return {
-    Card: Card
-  };
+
+  return Card;
 };

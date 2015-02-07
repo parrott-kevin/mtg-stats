@@ -1,58 +1,57 @@
 /**
- *
- * Created by parrott-kevin on 1/26/15.
+ * Created by parrott-kevin on 2/5/15.
  */
 
 'use strict';
-var Sequelize = require('Sequelize');
-var setInfo = {
-  fields:{
+
+module.exports = function(sequelize, DataTypes) {
+  var Set = sequelize.define('Set', {
     id: {
       field: 'id',
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true
     },
     Name: {
       field: 'Name',
-      type: Sequelize.STRING
+      type: DataTypes.STRING
     },
     Code: {
       field: 'Code',
-      type: Sequelize.STRING
+      type: DataTypes.STRING
     },
     GathererCode: {
       field: 'GathererCode',
-      type: Sequelize.STRING
+      type: DataTypes.STRING
     },
     OldCode: {
       field: 'OldCode',
-      type: Sequelize.STRING
+      type: DataTypes.STRING
     },
     ReleaseDate: {
       field: 'ReleaseDate',
-      type: Sequelize.DATE
+      type: DataTypes.DATE
     },
     Border: {
       field: 'Border',
-      type: Sequelize.STRING
+      type: DataTypes.STRING
     },
     SetType: {
       field: 'SetType',
-      type: Sequelize.STRING
+      type: DataTypes.STRING
     },
     Block: {
       field: 'Block',
-      type: Sequelize.STRING
+      type: DataTypes.STRING
     },
     OnlineOnly: {
       field: 'OnlineOnly',
-      type: Sequelize.BOOLEAN
+      type: DataTypes.BOOLEAN
     }
-  },
-  table:{
+  }, {
     tableName: 'SetInfo',
     timestamps: false
-  }
+  });
+
+  return Set;
 };
-module.exports = setInfo;
