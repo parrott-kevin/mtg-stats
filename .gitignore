@@ -3,7 +3,7 @@ node_modules
 public/bower_components
 .idea
 data
-config
+config/db-config.sequelize.js
 .DS_*
 public/assets/css
 public/assets/fonts
