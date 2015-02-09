@@ -30,7 +30,7 @@ module.exports = function(sequelize, DataTypes) {
     },
     ReleaseDate: {
       field: 'ReleaseDate',
-      type: DataTypes.DATE
+      type: DataTypes.DATEONLY
     },
     Border: {
       field: 'Border',

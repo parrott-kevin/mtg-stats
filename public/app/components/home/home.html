@@ -17,25 +17,14 @@
     </div>
     <div class="col-md-5" ng-if="vm.card">
       <h4>{{vm.cardInfo.Name}}</h4>
-      <div class="row text-right" ng-repeat="cardAttribute in vm.cardAttributes" ng-if="vm.cardInfo[cardAttribute[0]]">
+      <div class="row text-right" ng-repeat="cardAttribute in vm.cardAttributes" ng-if="cardAttribute[1]">
         <div class="col-md-3">
-            <span ng-if="cardAttribute.length <= 1">{{cardAttribute[0]}}:</span>
-            <span ng-if="cardAttribute.length > 1">{{cardAttribute[1]}}:</span>
+            <span>{{cardAttribute[0]}}:</span>
         </div>
         <div class="col-md-9 text-left">
-          {{vm.cardInfo[cardAttribute[0]]}}
+          {{cardAttribute[1]}}
         </div>
       </div>
-      <div class="row text-right" ng-repeat="setAt in vm.setAttributes" ng-if="vm.setInfo[setAt[0]]">
-        <div class="col-md-3">
-            <span ng-if="setAt.length <= 1">{{setAt[0]}}:</span>
-            <span ng-if="setAt.length > 1">{{setAt[1]}}:</span>
-        </div>
-        <div class="col-md-9 text-left">
-          {{vm.setInfo[setAt[0]]}}
-        </div>
-      </div>
-
     </div>
   </div>
 

@@ -4,15 +4,12 @@
 
 'use strict';
 
-var models = require('../models');
+var cards = require('../services/cards');
 
 module.exports = {
   get: {
     cardInfoIdSet: function(req, res) {
-      models.Card.findAll({
-        attributes: ['id', 'Name', 'MultiverseId'],
-        include: [{model: models.Set, attributes: ['Name']}]
-      })
+      cards.cardInfoIdSet()
         .then(function(data) {
           console.log('Retrieving cards');
           res.send(data);
@@ -23,12 +20,7 @@ module.exports = {
         });
     },
     cardInfo: function(req, res) {
-      var id = req.query.id;
-      console.log(id);
-      models.Card.find({
-        where: {id: id},
-        include: [models.Set]
-      })
+      cards.cardInfo(req)
         .then(function(data) {
           res.send(data);
         })

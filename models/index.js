@@ -10,7 +10,7 @@ var path = require('path');
 var env = process.env.NODE_ENV || 'development';
 var dbConfig = require('../config/db-config.sequelize')[env];
 var Sequelize = require('sequelize');
-var sequelize = new Sequelize(dbConfig.database, dbConfig.username, dbConfig.password, dbConfig);
+var sequelize = new Sequelize(dbConfig.database, dbConfig.username, dbConfig.password, dbConfig.options);
 var db = {};
 
 fs
