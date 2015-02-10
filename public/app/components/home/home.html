@@ -1,16 +1,20 @@
 <div class="container">
+
   <div class="row">
     <div class="col-md-12">
       <h4>Search</h4>
-      <input
-        type="text" ng-model="vm.card"
-        typeahead="card as card.Name for card in vm.cardNameIdSetObj | filter:{Name:$viewValue} | limitTo:8"
-        typeahead-template-url="typeaheadTemplate.html"
-        typeahead-on-select="vm.onSelect()"
-        class="form-control" autofocus="1"
-      />
+      <form ng-submit="vm.submit()">
+        <input
+          type="text" ng-model="vm.card"
+          typeahead="card as card.Name for card in vm.cardNameIdSetObj | filter:{Name:$viewValue} | limitTo:8"
+          typeahead-template-url="typeaheadTemplate.html"
+          typeahead-on-select="vm.onSelect()"
+          class="form-control" autofocus="1"
+        />
+      </form>
     </div>
   </div>
+
   <div class="row top-buffer">
     <div class="col-md-3">
       <img class="img-rounded img-responsive" ng-src={{vm.imgsrc}} alt="{{vm.cardInfo.ImageName}}" />

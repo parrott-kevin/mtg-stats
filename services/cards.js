@@ -20,5 +20,20 @@ module.exports = {
       where: {id: id},
       include: [models.Set]
     });
+  },
+  cardPartial: function(req) {
+    var name = req.query.name;
+    //var offset = req.query.offset;
+    //var limit = req.query.limit;
+    var limit = 10;
+    return models.Card.findAndCountAll({
+      where: {
+        Name: {
+          like: '%' + name + '%'
+        }
+      },
+      //offset: offset,
+      limit: limit
+    });
   }
 };

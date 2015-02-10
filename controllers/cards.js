@@ -5,29 +5,41 @@
 'use strict';
 
 var cards = require('../services/cards');
+var _ = require('lodash');
 
 module.exports = {
   get: {
-    cardInfoIdSet: function(req, res) {
-      cards.cardInfoIdSet()
-        .then(function(data) {
-          console.log('Retrieving cards');
-          res.send(data);
-        })
-        .catch(function(error) {
-          res.send('Error retrieving card name and mid');
-          console.log(error);
-        });
-    },
     cardInfo: function(req, res) {
-      cards.cardInfo(req)
-        .then(function(data) {
-          res.send(data);
-        })
-        .catch(function(error) {
-          res.send('Error retrieving card');
-          console.log(error);
-        });
+      if (_.isEmpty(req.query)) {
+        cards.cardInfoIdSet()
+          .then(function(data) {
+            res.send(data);
+          })
+          .catch(function(error) {
+            res.send('Error retrieving card name and mid');
+            console.log(error);
+          });
+      } else {
+        if (!_.isUndefined(req.query.id)) {
+          cards.cardInfo(req)
+            .then(function(data) {
+              res.send(data);
+            })
+            .catch(function(error) {
+              res.send('Error retrieving card');
+              console.log(error);
+            });
+        } else {
+          cards.cardPartial(req)
+            .then(function(data) {
+              res.send(data);
+            })
+            .catch(function(error) {
+              res.send('Error retrieving card partial');
+              console.log(error);
+            });
+        }
+      }
     }
   }
 

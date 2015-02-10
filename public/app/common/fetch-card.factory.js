@@ -14,9 +14,8 @@
     return {
       getCardNameIdSet: function() {
         return $http({
-          url: '/api/card/cardInfoIdSet',
-          method: 'GET',
-          cache: true
+          url: '/api/card/',
+          method: 'GET'
         }).success(function(data) {
           return data;
         });
@@ -26,6 +25,17 @@
           url: '/api/card/',
           method: 'GET',
           params: {id: id}
+        }).success(function(data) {
+          return data;
+        });
+      },
+      getCardPartial: function(name) {
+        return $http({
+          url: '/api/card/',
+          method: 'GET',
+          params: {
+            name: name
+          }
         }).success(function(data) {
           return data;
         });
