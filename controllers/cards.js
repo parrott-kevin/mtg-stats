@@ -11,7 +11,7 @@ module.exports = {
   get: {
     cardInfo: function(req, res) {
       if (_.isEmpty(req.query)) {
-        cards.cardInfoIdSet()
+        cards.cardNameId()
           .then(function(data) {
             res.send(data);
           })

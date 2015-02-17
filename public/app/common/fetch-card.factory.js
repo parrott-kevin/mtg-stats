@@ -24,7 +24,9 @@
         return $http({
           url: '/api/card/',
           method: 'GET',
-          params: {id: id}
+          params: {
+            id: id
+          }
         }).success(function(data) {
           return data;
         });

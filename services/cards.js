@@ -6,12 +6,20 @@
 'use strict';
 
 var models = require('../models');
+var Sequelize = require('sequelize');
 
 module.exports = {
-  cardInfoIdSet: function() {
+  cardNameId: function() {
     return models.Card.findAll({
-      attributes: ['id', 'Name', 'MultiverseId'],
-      include: [{model: models.Set, attributes: ['Name']}]
+      attributes: [
+        'id',
+        'Name',
+        'MultiverseId'
+        ],
+      group: ['Name'],
+      order: [
+        Sequelize.fn('MAX', Sequelize.col('MultiverseId'))
+      ]
     });
   },
   cardInfo: function(req) {

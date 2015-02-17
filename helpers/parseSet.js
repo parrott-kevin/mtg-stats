@@ -17,6 +17,8 @@ sets += _.reduce(fileKeys, function(i, j) {
   return i + '|,|' + j;
 });
 
+sets += '|' + os.EOL;
+
 _.forEach(parseFile, function(selectedSet) {
   var line = '|';
 

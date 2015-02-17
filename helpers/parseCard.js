@@ -7,8 +7,31 @@ var fs = require('fs');
 var os = require('os');
 var _ = require('lodash');
 
-var parseFilePath = '../data/mtg-json/AllSetsArray.json';
-var fileKeys = ['layout', 'name', 'manaCost', 'cmc', 'type', 'rarity', 'text', 'flavor', 'artist', 'number', 'power', 'toughness', 'loyalty', 'multiverseid', 'imageName', 'watermark', 'border', 'timeshifted', 'reserved'];
+var parseFilePath = '../data/mtg-json/AllSetsArray-x.json';
+var fileKeys = [
+  'layout',
+  'name',
+  'manaCost',
+  'cmc',
+  'type',
+  'rarity',
+  'text',
+  'flavor',
+  'artist',
+  'number',
+  'power',
+  'toughness',
+  'loyalty',
+  'multiverseid',
+  'imageName',
+  'watermark',
+  'border',
+  'timeshifted',
+  'reserved',
+  'printings',
+  'originalText',
+  'originalType',
+  'source'];
 var parsedFilePath = '../data/mtg-json/cards.csv';
 
 var parseFile = JSON.parse(fs.readFileSync(parseFilePath));
@@ -31,11 +54,6 @@ _.forEach(parseFile, function(selectedSet) {
       if ((n === 'reserved' || n === 'timeshifted') && columnValue === true) {
         columnValue = 1;
       }
-      //if ((n === _.last(fileKeys)) && _.isUndefined(columnValue)) {
-      //  columnValue = 0;
-      //} else if (n === _.last(fileKeys) && !_.isUndefined(columnValue)) {
-      //  columnValue = 1;
-      //}
 
       if (_.isUndefined(columnValue)) {
         line += '';

@@ -7,7 +7,6 @@
         <input
           type="text" ng-model="vm.card"
           typeahead="card as card.Name for card in vm.cardNameIdSetObj | filter:{Name:$viewValue} | limitTo:8"
-          typeahead-template-url="typeaheadTemplate.html"
           typeahead-on-select="vm.onSelect()"
           class="form-control" autofocus="1"
         />
@@ -19,23 +18,26 @@
     <div class="col-md-3">
       <img class="img-rounded img-responsive" ng-src={{vm.imgsrc}} alt="{{vm.cardInfo.ImageName}}" />
     </div>
-    <div class="col-md-5" ng-if="vm.card">
+    <div class="col-md-9" ng-if="vm.card">
       <h4>{{vm.cardInfo.Name}}</h4>
       <div class="row text-right" ng-repeat="cardAttribute in vm.cardAttributes" ng-if="cardAttribute[1]">
         <div class="col-md-3">
-            <span>{{cardAttribute[0]}}:</span>
+          <span>{{cardAttribute[0]}}:</span>
         </div>
-        <div class="col-md-9 text-left">
-          {{cardAttribute[1]}}
+        <div class="col-md-9 text-left" ng-switch on="cardAttribute[0]">
+          <span ng-switch-when="Printings">
+            <a ng-repeat="printing in cardAttribute[1]" class="btn btn-default" href="#" role="button">
+              {{printing}}
+            </a>
+          </span>
+          <span ng-switch-default>
+            {{cardAttribute[1]}}
+          </span>
         </div>
       </div>
+
     </div>
   </div>
 
 </div>
-<script type="text/ng-template" id="typeaheadTemplate.html">
-  <a>
-    <span bind-html-unsafe="match.label | typeaheadHighlight: query"></span>
-    <span><small>| <em>{{match.model.Set.Name}}</em></small></span>
-  </a>
-</script>
+

@@ -70,7 +70,7 @@ module.exports = function(sequelize, DataTypes) {
       },
       MultiverseId: {
         field: 'MultiverseId',
-        type: DataTypes.STRING
+        type: DataTypes.INTEGER
       },
       ImageName: {
         field: 'ImageName',
@@ -91,6 +91,22 @@ module.exports = function(sequelize, DataTypes) {
       Reserved: {
         field: 'Reserved',
         type: DataTypes.BOOLEAN
+      },
+      Printings: {
+        field: 'Printings',
+        type: DataTypes.TEXT
+      },
+      OriginalText: {
+        field: 'OriginalText',
+        type: DataTypes.TEXT
+      },
+      OriginalType: {
+        field: 'OriginalType',
+        type: DataTypes.STRING
+      },
+      Source: {
+        field: 'Source',
+        type: DataTypes.STRING
       }
     }, {
       tableName: 'CardInfo',

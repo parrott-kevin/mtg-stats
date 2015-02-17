@@ -7,3 +7,5 @@ config/db-config.sequelize.js
 .DS_*
 public/assets/css
 public/assets/fonts
+*.mwb.bak
+*.mwb

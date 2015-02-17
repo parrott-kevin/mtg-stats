@@ -45,10 +45,12 @@
           ['Mana Cost', vm.cardInfo.ManaCost],
           ['CMC', vm.cardInfo.CMC],
           ['Type', vm.cardInfo.Type],
+          //['Original Type', vm.cardInfo.OriginalType],
           ['Power', vm.cardInfo.Power],
           ['Toughness', vm.cardInfo.Toughness],
           ['Loyalty', vm.cardInfo.Loyalty],
           ['Text', vm.cardInfo.Text],
+          //['Original Text', vm.cardInfo.OriginalText],
           ['Flavor', vm.cardInfo.Flavor],
           ['Artist', vm.cardInfo.Artist],
           ['Rarity', vm.cardInfo.Rarity],
@@ -66,8 +68,10 @@
           ['Set Name', vm.cardInfo.Set.Name],
           ['Old Code', vm.cardInfo.Set.OldCode],
           ['Online Only', vm.cardInfo.Set.OnlineOnly],
-          ['Release Date', $filter('date')(vm.cardInfo.Set.ReleaseDate, 'longDate')]
+          ['Release Date', $filter('date')(vm.cardInfo.Set.ReleaseDate, 'longDate')],
           //['SetType', 'Set Type']
+          ['Printings', vm.cardInfo.Printings.split(',')],
+          ['Source', vm.cardInfo.Source]
         ];
       });
     };
