@@ -7,6 +7,7 @@
 
 var models = require('../models');
 var Sequelize = require('sequelize');
+var _ = require('lodash');
 
 module.exports = {
   cardNameId: function() {
@@ -24,10 +25,24 @@ module.exports = {
   },
   cardInfo: function(req) {
     var id = req.query.id;
-    return models.Card.find({
-      where: {id: id},
-      include: [models.Set]
-    });
+    var name = req.query.name;
+    var setId = req.query.setId;
+
+    if (_.isUndefined(req.query.id)) {
+      return models.Card.find({
+        where: {
+          Name: name,
+          SetInfoId: setId
+        },
+        include: [models.Set]
+      });
+    } else {
+      return models.Card.find({
+        where: {id: id},
+        include: [models.Set]
+      });
+    }
+
   },
   cardPartial: function(req) {
     var name = req.query.name;

@@ -8,7 +8,8 @@
     .module('app', [
       'ngRoute',
       'home.controller',
-      'fetch-card.factory'
+      'fetch-card.factory',
+      'fetch-set.factory'
     ])
     .constant('_', window._)
     .run(function($rootScope) {

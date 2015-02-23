@@ -5,21 +5,22 @@
 
 'use strict';
 
-module.exports = function(sequelize) {
-  var model = require('../models/set.js')(sequelize);
-  var Set = model.Set;
+var sets = require('../services/sets');
+var _ = require('lodash');
 
-  return {
-    get: function(req, res) {
-      Set.findAll({
-        //include: ['CardInfo']
-      })
-        .then(function(data) {
-          res.send(data);
-        })
-        .catch(function(err) {
-          console.log(err);
-        });
+module.exports = {
+  get: {
+    setInfo: function(req, res) {
+      if (_.isEmpty(req.query)) {
+        sets.setNameId()
+          .then(function(data) {
+            res.send(data);
+          })
+          .catch(function(error) {
+            res.send('Error retrieving set name and id');
+            console.log(error);
+          });
+      }
     }
-  };
+  }
 };

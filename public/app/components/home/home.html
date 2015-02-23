@@ -26,9 +26,9 @@
         </div>
         <div class="col-md-9 text-left" ng-switch on="cardAttribute[0]">
           <span ng-switch-when="Printings">
-            <a ng-repeat="printing in cardAttribute[1]" class="btn btn-default" href="#" role="button">
+            <button ng-repeat="printing in cardAttribute[1]" class="btn btn-default" ng-click="vm.otherPrinting(printing)">
               {{printing}}
-            </a>
+            </button>
           </span>
           <span ng-switch-default>
             {{cardAttribute[1]}}
