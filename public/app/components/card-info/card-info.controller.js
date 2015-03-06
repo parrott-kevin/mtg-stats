@@ -36,7 +36,6 @@
     function displayCard(card) {
       vm.cardInfo = card;
       var printings = vm.cardInfo.Printings.split(',');
-
       vm.cardAttributes = [
         ['Mana Cost', vm.cardInfo.ManaCost],
         ['CMC', vm.cardInfo.CMC],
