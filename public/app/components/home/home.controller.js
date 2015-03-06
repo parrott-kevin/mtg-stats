@@ -19,8 +19,6 @@
       fetchCard.getCardNameIdSet().then(function(d) {
         sessionStorage.cardNameIdSetObj = angular.toJson(d.data);
         vm.cardNameIdSetObj = angular.fromJson(sessionStorage.cardNameIdSetObj);
-
-        //vm.cardNameIdSetObj = angular.fromJson(d.data);
       });
     }
 
@@ -28,7 +26,6 @@
       fetchSet.getSetNameId().then(function(d) {
         sessionStorage.setNameIdObj = angular.toJson(d.data);
         vm.setNameIdObj = angular.fromJson(sessionStorage.setNameIdObj);
-        //vm.setNameIdObj = angular.fromJson(d.data);
       });
     }
 

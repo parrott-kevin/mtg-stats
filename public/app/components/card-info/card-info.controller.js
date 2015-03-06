@@ -22,21 +22,20 @@
     var id = $routeParams.id;
 
     fetchCard.getCardInfo(id).then(function(d) {
-      displayCard(d);
+      displayCard(angular.fromJson(d.data));
     });
 
+    vm.setNameIdObj = angular.fromJson(sessionStorage.setNameIdObj);
+
     vm.otherPrinting = function(printing) {
-
-      vm.setNameIdObj = angular.fromJson(sessionStorage.setNameIdObj);
-
       fetchCard.getCardInfoBySet(vm.cardInfo.Name, (_.find(vm.setNameIdObj, {Name: printing})).id).then(function(d) {
         $location.path('/cardInfo/' + angular.fromJson(d).data.id);
       });
-
     };
 
     function displayCard(card) {
-      vm.cardInfo = angular.fromJson(card.data);
+      vm.cardInfo = card;
+      var printings = vm.cardInfo.Printings.split(',');
 
       vm.cardAttributes = [
         ['Mana Cost', vm.cardInfo.ManaCost],
@@ -67,7 +66,7 @@
         ['Online Only', vm.cardInfo.Set.OnlineOnly],
         ['Release Date', $filter('date')(vm.cardInfo.Set.ReleaseDate, 'longDate')],
         //['SetType', 'Set Type']
-        ['Printings', vm.cardInfo.Printings.split(',')],
+        ['Printings', printings],
         ['Source', vm.cardInfo.Source]
       ];
 
