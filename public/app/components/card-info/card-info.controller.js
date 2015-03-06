@@ -11,7 +11,6 @@
 
   CardInfoController.$inject = [
     'fetchCard',
-    'fetchSet',
     '_',
     '$routeParams',
     '$filter',
@@ -27,6 +26,8 @@
     });
 
     vm.otherPrinting = function(printing) {
+
+      vm.setNameIdObj = sessionStorage.setNameIdObj;
 
       fetchCard.getCardInfoBySet(vm.cardInfo.Name, (_.find(vm.setNameIdObj, {Name: printing})).id).then(function(d) {
         $location.path('/cardInfo/' + angular.fromJson(d).data.id);
