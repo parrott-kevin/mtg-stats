@@ -23,40 +23,28 @@ module.exports = {
       ]
     });
   },
-  cardInfo: function(req) {
-    var id = req.query.id;
-    var name = req.query.name;
-    var setId = req.query.setId;
-
-    if (_.isUndefined(req.query.id)) {
-      return models.Card.find({
-        where: {
-          Name: name,
-          SetInfoId: setId
-        },
-        include: [models.Set]
-      });
-    } else {
-      return models.Card.find({
-        where: {id: id},
-        include: [models.Set]
-      });
-    }
-
+  cardInfoNameSet: function(name, setId) {
+    return models.Card.find({
+      where: {
+        Name: name,
+        SetInfoId: setId
+      },
+      include: [models.Set]
+    });
   },
-  cardPartial: function(req) {
-    var name = req.query.name;
-    //var offset = req.query.offset;
-    //var limit = req.query.limit;
-    var limit = 10;
+  cardInfoId: function(id) {
+    return models.Card.find({
+      where: {id: id},
+      include: [models.Set]
+    });
+  },
+  cardPartial: function(name) {
     return models.Card.findAndCountAll({
       where: {
         Name: {
           like: '%' + name + '%'
         }
-      },
-      //offset: offset,
-      limit: limit
+      }
     });
   }
 };

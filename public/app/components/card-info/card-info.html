@@ -1,24 +1,10 @@
 <div class="container">
 
-  <div class="row">
-    <div class="col-md-12">
-      <h4>Search</h4>
-      <form ng-submit="vm.submit()">
-        <input
-          type="text" ng-model="vm.card"
-          typeahead="card as card.Name for card in vm.cardNameIdSetObj | filter:{Name:$viewValue} | limitTo:8"
-          typeahead-on-select="vm.onSelect()"
-          class="form-control" autofocus="1"
-        />
-      </form>
-    </div>
-  </div>
-
   <div class="row top-buffer">
     <div class="col-md-3">
       <img class="img-rounded img-responsive" ng-src={{vm.imgsrc}} alt="{{vm.cardInfo.ImageName}}" />
     </div>
-    <div class="col-md-9" ng-if="vm.card">
+    <div class="col-md-9">
       <h4>{{vm.cardInfo.Name}}</h4>
       <div class="row text-right" ng-repeat="cardAttribute in vm.cardAttributes" ng-if="cardAttribute[1]">
         <div class="col-md-3">
@@ -40,4 +26,3 @@
   </div>
 
 </div>
-

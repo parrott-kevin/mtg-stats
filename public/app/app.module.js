@@ -8,6 +8,7 @@
     .module('app', [
       'ngRoute',
       'home.controller',
+      'card-info.controller',
       'fetch-card.factory',
       'fetch-set.factory'
     ])
