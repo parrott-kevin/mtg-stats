@@ -36,6 +36,11 @@
     function displayCard(card) {
       vm.cardInfo = card;
       var printings = vm.cardInfo.Printings.split(',');
+
+      vm.cardInfo.ManaCost = _.map(_.words(vm.cardInfo.ManaCost, /[^{}]+/g), function(n) {
+        return 'http://mtgimage.com/symbol/mana/' + n + '.svg';
+      });
+
       vm.cardAttributes = [
         ['Mana Cost', vm.cardInfo.ManaCost],
         ['CMC', vm.cardInfo.CMC],

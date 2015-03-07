@@ -6,13 +6,13 @@
     "start": "node ./bin/www"
   },
   "dependencies": {
-    "bluebird": "^2.5.3",
+    "bluebird": "2.4.2",
     "body-parser": "^1.10.0",
     "debug": "^2.1.1",
     "express": "^4.10.6",
-    "lodash": "^2.4.1",
-    "mysql": "^2.5.4",
-    "sequelize": "^2.0.0-rc8"
+    "lodash": "~2.4.1",
+    "mysql": "~2.5.0",
+    "sequelize": "^2.0.0"
   },
   "description": "API for mtg-stats",
   "main": "app.js",
