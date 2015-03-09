@@ -10,7 +10,8 @@
       'home.controller',
       'card-info.controller',
       'fetch-card.factory',
-      'fetch-set.factory'
+      'fetch-set.factory',
+      'symbol.factory'
     ])
     .constant('_', window._)
     .run(function($rootScope) {

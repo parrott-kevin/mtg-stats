@@ -11,13 +11,14 @@
 
   CardInfoController.$inject = [
     'fetchCard',
+    'symbol',
     '_',
     '$routeParams',
     '$filter',
     '$location'
   ];
 
-  function CardInfoController (fetchCard, _, $routeParams, $filter, $location) {
+  function CardInfoController (fetchCard, symbol, _, $routeParams, $filter, $location) {
     var vm = this;
     var id = $routeParams.id;
 
@@ -37,9 +38,7 @@
       vm.cardInfo = card;
       var printings = vm.cardInfo.Printings.split(',');
 
-      vm.cardInfo.ManaCost = _.map(_.words(vm.cardInfo.ManaCost, /[^{}]+/g), function(n) {
-        return 'http://mtgimage.com/symbol/mana/' + n + '.svg';
-      });
+      vm.cardInfo.ManaCost = symbol.convert(vm.cardInfo.ManaCost);
 
       vm.cardAttributes = [
         ['Mana Cost', vm.cardInfo.ManaCost],
