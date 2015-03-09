@@ -7,7 +7,6 @@
 
 var models = require('../models');
 var Sequelize = require('sequelize');
-var _ = require('lodash');
 
 module.exports = {
   cardNameId: function() {
