@@ -11,13 +11,14 @@
   symbol.$inject = ['_'];
 
   function symbol(_) {
-    return {
-      convert: function(manaCost) {
-        return _.map(_.words(manaCost, /[^{}]+/g), function(n) {
-          n = n.replace(/\//g, '');
-          return 'http://mtgimage.com/symbol/mana/' + n + '.svg';
-        });
-      }
-    };
+// Refactor to use local svg
+    //return {
+    //  convert: function(manaCost) {
+    //    return _.map(_.words(manaCost, /[^{}]+/g), function(n) {
+    //      n = n.replace(/\//g, '').toLowerCase();
+    //      return 'http://mtgjson.com/images/' + n + '.png';
+    //    });
+    //  }
+    //};
   }
 })();

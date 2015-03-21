@@ -38,7 +38,7 @@
       vm.cardInfo = card;
       var printings = vm.cardInfo.Printings.split(',');
 
-      vm.cardInfo.ManaCost = symbol.convert(vm.cardInfo.ManaCost);
+      //vm.cardInfo.ManaCost = symbol.convert(vm.cardInfo.ManaCost);
 
       vm.cardAttributes = [
         ['Mana Cost', vm.cardInfo.ManaCost],
@@ -73,11 +73,8 @@
         ['Source', vm.cardInfo.Source]
       ];
 
-      var mtgImage = 'http://mtgimage.com/';
-      if (_.isNull(vm.cardInfo.MultiverseId)) {
-        vm.imgsrc = mtgImage + 'set/' + vm.cardInfo.Set.Code + '/' + vm.cardInfo.Name + '.jpg';
-      } else {
-        vm.imgsrc = mtgImage + 'multiverseid/' + vm.cardInfo.MultiverseId + '.jpg';
+      if (!_.isNull(vm.cardInfo.MultiverseId)) {
+        vm.imgsrc = 'http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=' + vm.cardInfo.MultiverseId + '&type=card';
       }
 
     }

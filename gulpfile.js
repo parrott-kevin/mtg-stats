@@ -16,8 +16,6 @@ gulp.task('dev', [
     'clean:dev',
     'styles',
     'fonts:dev'
-    //'webserver:dev',
-    //'watch'
   ], function() {}
 );
 
@@ -32,11 +30,6 @@ gulp.task('styles', function() {
     .pipe(gulp.dest('./public/assets/css'));
 });
 
-// Watch less files for changes
-gulp.task('watch', function() {
-  gulp.watch(['public/assets/less/*.less'], ['styles']);
-});
-
 //---------------------------------------------------------------------------//
 // Tasks for running dev
 //---------------------------------------------------------------------------//
@@ -49,8 +42,8 @@ gulp.task('clean:dev', function() {
 // Copy fonts for dev
 gulp.task('fonts:dev', function() {
   gulp.src([
-    'public/bower_components/bootstrap/fonts/*',
-    'public/bower_components/fontawesome/fonts/*'
+    'public/lib/bootstrap/fonts/*',
+    'public/lib/fontawesome/fonts/*'
   ])
     .pipe(gulp.dest('public/assets/fonts'));
 });
