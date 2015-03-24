@@ -5,7 +5,7 @@
 'use strict';
 
 module.exports = function(sequelize, DataTypes) {
-  var Set = sequelize.define('Set', {
+  var SetModel = sequelize.define('Set', {
     id: {
       field: 'id',
       type: DataTypes.INTEGER,
@@ -53,5 +53,5 @@ module.exports = function(sequelize, DataTypes) {
     timestamps: false
   });
 
-  return Set;
+  return SetModel;
 };

@@ -24,6 +24,11 @@
         controller: 'CardInfoController',
         controllerAs: 'vm'
       })
+      .when('/search/:name', {
+        templateUrl: 'app/components/search/search.html',
+        controller: 'SearchController',
+        controllerAs: 'vm'
+      })
       .otherwise({
         redirectTo: '/'
       });

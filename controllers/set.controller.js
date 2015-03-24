@@ -5,14 +5,14 @@
 
 'use strict';
 
-var sets = require('../services/sets');
+var setService = require('../services/set.service');
 var _ = require('lodash');
 
 module.exports = {
   get: {
     setInfo: function(req, res) {
       if (_.isEmpty(req.query)) {
-        sets.setNameId()
+        setService.setNameId()
           .then(function(data) {
             res.send(data);
           })

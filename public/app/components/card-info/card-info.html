@@ -8,10 +8,10 @@
     <div class="col-md-9">
       <h4>{{vm.cardInfo.Name}}</h4>
       <div class="row text-right" ng-repeat="cardAttribute in vm.cardAttributes" ng-if="cardAttribute[1]">
-        <div class="col-md-3">
+        <div class="col-md-2">
           <span>{{cardAttribute[0]}}:</span>
         </div>
-        <div class="col-md-9 text-left" ng-switch on="cardAttribute[0]">
+        <div class="col-md-10 text-left" ng-switch on="cardAttribute[0]">
           <!--<span ng-switch-when="Mana Cost">-->
             <!--<img ng-repeat="symbol in cardAttribute[1]" ng-src="{{symbol}}" style="width: 16px; height: 16px;">-->
           <!--</span>-->

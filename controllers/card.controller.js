@@ -4,7 +4,7 @@
 
 'use strict';
 
-var cards = require('../services/cards');
+var cardService = require('../services/card.service');
 var _ = require('lodash');
 
 module.exports = {
@@ -16,7 +16,7 @@ module.exports = {
 
       // Card by multiverseid
       if (!_.isUndefined(id)) {
-        cards.cardInfoId(id)
+        cardService.get.cardInfoId(id)
           .then(function(data) {
             res.send(data);
           })
@@ -27,7 +27,7 @@ module.exports = {
       }
       // Card by name and set
       if (!_.isUndefined(name) && !_.isUndefined(setId)) {
-        cards.cardInfoNameSet(name, setId)
+        cardService.get.cardInfoNameSet(name, setId)
           .then(function(data) {
             res.send(data);
           }).catch(function(error) {
@@ -40,7 +40,7 @@ module.exports = {
 
       // Get initial card info for typeahead
       if (_.isEmpty(req.query)) {
-        cards.cardNameId()
+        cardService.get.cardNameId()
           .then(function(data) {
             res.send(data);
           })
@@ -51,7 +51,7 @@ module.exports = {
       }
 
       if (!_.isUndefined(name)) {
-        cards.cardPartial(name)
+        cardService.get.cardPartial(name)
           .then(function(data) {
             res.send(data);
           })

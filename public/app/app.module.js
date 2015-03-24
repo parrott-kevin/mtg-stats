@@ -9,6 +9,7 @@
       'ngRoute',
       'home.controller',
       'card-info.controller',
+      'search.controller',
       'fetch-card.factory',
       'fetch-set.factory',
       'symbol.factory'

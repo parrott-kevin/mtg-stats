@@ -108,7 +108,8 @@ module.exports = function(sequelize, DataTypes) {
         field: 'Source',
         type: DataTypes.STRING
       }
-    }, {
+    },
+    {
       tableName: 'CardInfo',
       timestamps: false,
       classMethods: {

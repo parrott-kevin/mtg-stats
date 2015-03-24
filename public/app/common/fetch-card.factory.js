@@ -45,7 +45,7 @@
       },
       getCardPartial: function(name) {
         return $http({
-          url: '/api/card/info',
+          url: '/api/card/search',
           method: 'GET',
           params: {
             name: name
