@@ -4,15 +4,16 @@
 (function() {
   'use strict';
   angular
-    .module('search.controller', [])
+    .module('search.controller', ['ui.bootstrap'])
     .controller('SearchController', SearchController);
 
   SearchController.$inject = [
     'fetchCard',
+    '_',
     '$routeParams'
   ];
 
-  function SearchController(fetchCard, $routeParams) {
+  function SearchController(fetchCard, _, $routeParams) {
     var vm = this;
     var name = $routeParams.name;
 
@@ -21,7 +22,7 @@
     });
 
     function displayCards(data) {
-      vm.cards = data.rows;
+      vm.cards = _.sortBy(data.rows, 'Name');
     }
 
   }

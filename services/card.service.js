@@ -44,7 +44,8 @@ module.exports = {
           Name: {
             like: '%' + name + '%'
           }
-        }
+        },
+        include: [models.Set]
       });
     }
   }

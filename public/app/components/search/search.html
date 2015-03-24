@@ -1,7 +1,6 @@
 <div class="container">
-  <div class="col-md-12">
-    <div class="row" ng-repeat="card in vm.cards">
-      <h4>{{card.Name}}</h4>
-    </div>
-  </div>
+  <accordion>
+    <accordion-group heading="{{card.Name}} - {{card.Set.Name}}" ng-repeat="card in vm.cards">
+    </accordion-group>
+  </accordion>
 </div>
