@@ -12,9 +12,6 @@
           <span>{{cardAttribute[0]}}:</span>
         </div>
         <div class="col-md-10 text-left" ng-switch on="cardAttribute[0]">
-          <!--<span ng-switch-when="Mana Cost">-->
-            <!--<img ng-repeat="symbol in cardAttribute[1]" ng-src="{{symbol}}" style="width: 16px; height: 16px;">-->
-          <!--</span>-->
           <span ng-switch-when="Printings">
             <button ng-repeat="printing in cardAttribute[1]" class="btn btn-default" ng-click="vm.otherPrinting(printing)">
               {{printing}}

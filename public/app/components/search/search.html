@@ -1,6 +1,6 @@
 <div class="container">
-  <accordion>
-    <accordion-group heading="{{card.Name}} - {{card.Set.Name}}" ng-repeat="card in vm.cards">
+  <accordion close-others="false">
+    <accordion-group heading="{{card.Name}}" ng-repeat="card in vm.cards">
     </accordion-group>
   </accordion>
 </div>

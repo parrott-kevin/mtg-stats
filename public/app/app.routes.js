@@ -14,11 +14,11 @@
 
   function routeConfig($routeProvider) {
     $routeProvider
-      .when('/', {
+      //.when('/', {
         //templateUrl: 'app/components/home/home.html',
         //controller: 'HomeController',
         //controllerAs: 'vm'
-      })
+      //})
       .when('/cardInfo/:id', {
         templateUrl: 'app/components/card-info/card-info.html',
         controller: 'CardInfoController',

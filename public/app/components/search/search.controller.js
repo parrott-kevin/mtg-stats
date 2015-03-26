@@ -22,6 +22,7 @@
     });
 
     function displayCards(data) {
+      console.log(data);
       vm.cards = _.sortBy(data.rows, 'Name');
     }
 

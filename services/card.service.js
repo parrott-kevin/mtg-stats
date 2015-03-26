@@ -45,7 +45,11 @@ module.exports = {
             like: '%' + name + '%'
           }
         },
-        include: [models.Set]
+        include: [models.Set],
+        group: ['Name'],
+        order: [
+          Sequelize.fn('MAX', Sequelize.col('MultiverseId'))
+        ]
       });
     }
   }
