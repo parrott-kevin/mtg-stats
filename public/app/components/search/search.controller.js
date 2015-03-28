@@ -9,7 +9,6 @@
 
   SearchController.$inject = [
     'fetchCard',
-    'displayCard',
     'cardImage',
     '_',
     '$routeParams'
