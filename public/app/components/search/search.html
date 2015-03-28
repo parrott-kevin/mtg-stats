@@ -1,6 +1,14 @@
 <div class="container">
-  <accordion close-others="false">
-    <accordion-group heading="{{card.Name}}" ng-repeat="card in vm.cards">
-    </accordion-group>
-  </accordion>
+  <div class="row top-buffer" ng-repeat="card in vm.cards">
+    <div class="col-md-3">
+      <a ng-href="#/cardInfo/{{card.id}}"><img ng-src="{{card.ImageLink}}"></a>
+    </div>
+    <div class="col-md-5">
+      <h4>{{card.Name}}</h4>
+      {{card.Text}}
+    </div>
+    <div class="col-md-4">
+      {{card.Printings}}
+    </div>
+  </div>
 </div>

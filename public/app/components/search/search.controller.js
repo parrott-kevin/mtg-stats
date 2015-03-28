@@ -10,11 +10,12 @@
   SearchController.$inject = [
     'fetchCard',
     'displayCard',
+    'cardImage',
     '_',
     '$routeParams'
   ];
 
-  function SearchController(fetchCard, displayCard, _, $routeParams) {
+  function SearchController(fetchCard, cardImage, _, $routeParams) {
     var vm = this;
     var name = $routeParams.name;
 
@@ -25,12 +26,9 @@
     function searchResults(data) {
       vm.cards = _.sortBy(data.rows, 'Name');
 
-      //var imgArray = [];
-      //_.forEach(data.rows, function(i) {
-      //  imgArray.push(displayCard.display(i).imgsrc);
-      //});
-
-      //console.log(imgArray);
+      _.forEach(vm.cards, function(card) {
+        card.ImageLink = cardImage.link(card.MultiverseId);
+      });
     }
 
   }
