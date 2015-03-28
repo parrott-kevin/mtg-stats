@@ -14,7 +14,6 @@
     'displayCard',
     '_',
     '$routeParams',
-    '$filter',
     '$location'
   ];
 
@@ -32,7 +31,8 @@
     vm.setNameIdObj = angular.fromJson(sessionStorage.setNameIdObj);
 
     vm.otherPrinting = function(printing) {
-      fetchCard.getCardInfoBySet(vm.cardInfo.Name, (_.find(vm.setNameIdObj, {Name: printing})).id).then(function(d) {
+      var otherCardId = (_.find(vm.setNameIdObj, {Name: printing})).id;
+      fetchCard.getCardInfoBySet(vm.cardInfo.Name, otherCardId).then(function(d) {
         $location.path('/cardInfo/' + angular.fromJson(d).data.id);
       });
     };

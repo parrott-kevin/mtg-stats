@@ -9,21 +9,24 @@
 
   SearchController.$inject = [
     'fetchCard',
+    'displayCard',
     '_',
     '$routeParams'
   ];
 
-  function SearchController(fetchCard, _, $routeParams) {
+  function SearchController(fetchCard, displayCard, _, $routeParams) {
     var vm = this;
     var name = $routeParams.name;
 
     fetchCard.getCardPartial(name).then(function(d) {
-      displayCards(angular.fromJson(d.data));
+      searchResults(angular.fromJson(d.data));
     });
 
-    function displayCards(data) {
-      console.log(data);
+    function searchResults(data) {
       vm.cards = _.sortBy(data.rows, 'Name');
+      _.forEach(data.rows, function(i) {
+        console.log(displayCard.display(i).imgsrc);
+      });
     }
 
   }
