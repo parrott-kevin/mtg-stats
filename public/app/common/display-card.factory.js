@@ -16,10 +16,6 @@
       display: function(card) {
         var printings = card.Printings.split(',');
 
-        if (!_.isNull(card.MultiverseId)) {
-          var imgsrc = 'http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=' + card.MultiverseId + '&type=card';
-        }
-
         var cardAttributes = [
           ['Mana Cost', card.ManaCost],
           ['CMC', card.CMC],
@@ -54,8 +50,7 @@
         ];
 
         return {
-          cardAttributes: cardAttributes,
-          imgsrc: imgsrc
+          cardAttributes: cardAttributes
         };
 
       }

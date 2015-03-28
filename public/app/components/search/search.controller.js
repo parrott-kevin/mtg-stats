@@ -24,9 +24,13 @@
 
     function searchResults(data) {
       vm.cards = _.sortBy(data.rows, 'Name');
-      _.forEach(data.rows, function(i) {
-        console.log(displayCard.display(i).imgsrc);
-      });
+
+      //var imgArray = [];
+      //_.forEach(data.rows, function(i) {
+      //  imgArray.push(displayCard.display(i).imgsrc);
+      //});
+
+      //console.log(imgArray);
     }
 
   }

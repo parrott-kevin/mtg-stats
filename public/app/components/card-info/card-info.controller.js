@@ -12,20 +12,20 @@
   CardInfoController.$inject = [
     'fetchCard',
     'displayCard',
+    'cardImage',
     '_',
     '$routeParams',
     '$location'
   ];
 
-  function CardInfoController (fetchCard, displayCard, _, $routeParams, $location) {
+  function CardInfoController (fetchCard, displayCard, cardImage, _, $routeParams, $location) {
     var vm = this;
     var id = $routeParams.id;
 
     fetchCard.getCardInfo(id).then(function(d) {
       vm.cardInfo = angular.fromJson(d.data);
-      var display = displayCard.display(vm.cardInfo);
-      vm.cardAttributes = display.cardAttributes;
-      vm.imgsrc = display.imgsrc;
+      vm.imgsrc = cardImage.link(vm.cardInfo.MultiverseId);
+      vm.cardAttributes = displayCard.display(vm.cardInfo).cardAttributes;
     });
 
     vm.setNameIdObj = angular.fromJson(sessionStorage.setNameIdObj);

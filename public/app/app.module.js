@@ -12,8 +12,8 @@
       'search.controller',
       'fetch-card.factory',
       'fetch-set.factory',
-      'symbol.factory',
-      'display-card.factory'
+      'display-card.factory',
+      'card-image.factory'
     ])
     .constant('_', window._)
     .run(function($rootScope) {

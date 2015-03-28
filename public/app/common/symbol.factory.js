@@ -8,9 +8,9 @@
     .module('symbol.factory', [])
     .factory('symbol', symbol);
 
-  symbol.$inject = ['_'];
+  symbol.$inject = [];
 
-  function symbol(_) {
+  function symbol() {
 // Refactor to use local svg
     //return {
     //  convert: function(manaCost) {
