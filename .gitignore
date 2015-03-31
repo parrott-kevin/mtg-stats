@@ -1,11 +1,12 @@
 # Created by .ignore support plugin (hsz.mobi)
 node_modules
-public/lib
+public/src/lib
 .idea
 data
 config/db-config.sequelize.js
 .DS_*
-public/assets/css
-public/assets/fonts
+public/src/assets/css
+public/src/assets/fonts
 *.mwb.bak
 *.mwb
+public/dist
