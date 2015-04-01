@@ -93,4 +93,4 @@ gulp.task('compress:lib', function() {
 gulp.task('watch', function() {
   gulp.watch('./public/src/app/**/*.js', ['compress:js']);
   gulp.watch('./public/src/assets/less/styles.less', ['less:css', 'compress:css']);
-})
+});
