@@ -14,57 +14,49 @@ var concat = require('gulp-concat');
 var minifyCSS = require('gulp-minify-css');
 
 //---------------------------------------------------------------------------//
-// Compilation Tasks
-//---------------------------------------------------------------------------//
-
-// Dev task
-gulp.task('dev', [
-    'clean:dev',
-    'styles',
-    'fonts:dev'
-  ], function() {}
-);
-
-gulp.task('dist', [
-  'clean:dist',
-  'compress:js',
-  'compress:lib',
-  'compress:css',
-  'copy:html',
-  'copy:fonts'
-]);
-
-//---------------------------------------------------------------------------//
-// Common Tasks
-//---------------------------------------------------------------------------//
-
-// Styles task
-gulp.task('styles', function() {
-  gulp.src('./public/assets/less/styles.less')
-    .pipe(less())
-    .pipe(gulp.dest('./public/assets/css'));
-});
-
-//---------------------------------------------------------------------------//
 // Tasks for running dev
 //---------------------------------------------------------------------------//
 
-// Clean task for dev
-gulp.task('clean:dev', function() {
-  del.sync(['public/assets/css/*', 'public/assets/fonts/*']);
-});
-
-// Copy fonts for dev
-gulp.task('fonts:dev', function() {
-  gulp.src([
-    'public/lib/bootstrap/fonts/*'
-  ])
-    .pipe(gulp.dest('public/assets/fonts'));
-});
+gulp.task('dev', [
+  'clean:dist',
+  'less:css',
+  'compress:css',
+  'copy:fonts',
+  'copy:html',
+  'compress:js',
+  'compress:lib',
+  'watch'
+], function() {});
 
 // Clean task for dist
 gulp.task('clean:dist', function() {
-  del.sync(['public/dist/*']);
+  return del.sync(['public/dist/*']);
+});
+
+// Convert less to css
+gulp.task('less:css', function() {
+  return gulp.src('./public/src/assets/less/styles.less')
+    .pipe(less())
+    .pipe(gulp.dest('./public/dist/css/'));
+});
+
+// Minify created css, depends on less:css
+gulp.task('compress:css', ['less:css'], function() {
+  return gulp.src('./public/dist/css/styles.css')
+    .pipe(minifyCSS())
+    .pipe(gulp.dest('./public/dist/css/'));
+});
+
+// Copy fonts for css
+gulp.task('copy:fonts', function() {
+  return gulp.src('./public/src/lib/bootstrap/fonts/*')
+    .pipe(gulp.dest('./public/dist/fonts/'));
+});
+
+// Copy html to dist
+gulp.task('copy:html', function() {
+  return gulp.src('./public/src/**/*.html')
+    .pipe(gulp.dest('./public/dist/'));
 });
 
 // Compress javascript
@@ -77,6 +69,7 @@ gulp.task('compress:js', function() {
     .pipe(gulp.dest('./public/dist/js'));
 });
 
+// Compress javascript libraries
 gulp.task('compress:lib', function() {
   var libDirectory = './public/src/lib/';
   var libSrc = [
@@ -86,6 +79,7 @@ gulp.task('compress:lib', function() {
     'angular-bootstrap/ui-bootstrap-tpls.js',
     'lodash/lodash.js'
   ];
+
   var lib = libSrc.map(function(i) {
     return libDirectory + i;
   });
@@ -95,18 +89,8 @@ gulp.task('compress:lib', function() {
     .pipe(gulp.dest('./public/dist/js'));
 });
 
-gulp.task('compress:css', function() {
-  return gulp.src('./public/src/assets/css/*.css')
-    .pipe(minifyCSS({keepBreaks: true}))
-    .pipe(gulp.dest('./public/dist/css'));
-});
-
-gulp.task('copy:html', function() {
-  return gulp.src('./public/src/**/*.html')
-    .pipe(gulp.dest('./public/dist/'));
-});
-
-gulp.task('copy:fonts', function() {
-  return gulp.src('./public/src/assets/fonts')
-    .pipe(gulp.dest('./public/dist/fonts'));
-});
+// Watch for javascript and less changes
+gulp.task('watch', function() {
+  gulp.watch('./public/src/app/**/*.js', ['compress:js']);
+  gulp.watch('./public/src/assets/less/styles.less', ['less:css', 'compress:css']);
+})
