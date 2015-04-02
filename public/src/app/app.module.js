@@ -13,10 +13,7 @@
       'fetch-card.factory',
       'fetch-set.factory',
       'display-card.factory',
-      'card-image.factory'
-    ])
-    .constant('_', window._)
-    .run(function($rootScope) {
-      $rootScope._ = window._;
-    });
+      'card-image.factory',
+      'lodash.factory'
+    ]);
 })();

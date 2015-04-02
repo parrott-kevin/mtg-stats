@@ -8,9 +8,9 @@
     .module('display-card.factory', [])
     .factory('displayCard', displayCard);
 
-  displayCard.$inject = ['_', '$filter'];
+  displayCard.$inject = ['$filter'];
 
-  function displayCard(_, $filter) {
+  function displayCard($filter) {
 
     return {
       display: function(card) {
