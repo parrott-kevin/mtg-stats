@@ -43,10 +43,6 @@
 
     vm.onPartial = function() {
       $location.path('/search/' + vm.card);
-      //fetchCard.getCardPartial(vm.card).then(function(d) {
-      //  vm.cardPartial = angular.fromJson(d.data);
-      //  console.log(vm.cardPartial);
-      //});
     };
 
   }

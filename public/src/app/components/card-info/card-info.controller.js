@@ -13,12 +13,13 @@
     'fetchCard',
     'displayCard',
     'cardImage',
+    'deckStorage',
     '_',
     '$routeParams',
     '$location'
   ];
 
-  function CardInfoController (fetchCard, displayCard, cardImage, _, $routeParams, $location) {
+  function CardInfoController (fetchCard, displayCard, cardImage, deckStorage, _, $routeParams, $location) {
     var vm = this;
     var id = $routeParams.id;
 
@@ -36,5 +37,27 @@
         $location.path('/cardInfo/' + angular.fromJson(d).data.id);
       });
     };
+
+    vm.addDeck = function(card) {
+      deckStorage.add(card);
+    };
+    //var deck = [];
+    //vm.addDeck = function(id) {
+    //  if (_.isEmpty(deck)) {
+    //    deck.push({
+    //      'id': id,
+    //      'quantity': 1
+    //    });
+    //  } else {
+    //    var result = _.find(deck, {'id': id}, 'quantity');
+    //    var ind = _.findIndex(deck, {'id': id});
+    //    if (!result) {
+    //      deck.push(id);
+    //    } else {
+    //      deck[ind].quantity += 1;
+    //    }
+    //  }
+    //  console.log(deck);
+    //};
   }
 })();

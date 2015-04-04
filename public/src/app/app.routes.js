@@ -29,6 +29,11 @@
         controller: 'SearchController',
         controllerAs: 'vm'
       })
+      .when('/deck', {
+        templateUrl: 'app/components/deck/deck.html',
+        controller: 'DeckController',
+        controllerAs: 'vm'
+      })
       .otherwise({
         redirectTo: '/'
       });

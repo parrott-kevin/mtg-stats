@@ -2,7 +2,12 @@
 
   <div class="row top-buffer">
     <div class="col-md-3">
-      <img class="img-rounded img-responsive" ng-src={{vm.imgsrc}} alt="{{vm.cardInfo.ImageName}}" />
+      <div class="row">
+        <img class="img-rounded img-responsive center-block" ng-src={{vm.imgsrc}} alt="{{vm.cardInfo.ImageName}}" />
+      </div>
+      <div class="row top-buffer text-center">
+        <button ng-click="vm.addDeck(vm.cardInfo)" class="btn btn-default">Add to Deck</button>
+      </div>
     </div>
 
     <div class="col-md-9">
