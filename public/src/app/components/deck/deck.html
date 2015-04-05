@@ -1,7 +1,5 @@
 <div class="container">
-  <ul ng-repeat="card in vm.deck">
-    <li>{{card.id}}</li>
-    <li>{{card.card.Name}}</li>
-    <li>{{card.qty}}</li>
-  </ul>
+  <div class="col-md-12" ng-repeat="card in vm.deck">
+    {{card.qty}} - <a ng-href="#/cardInfo/{{card.id}}">{{card.card.Name}}</a>
+  </div>
 </div>

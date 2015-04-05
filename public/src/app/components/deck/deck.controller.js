@@ -6,7 +6,7 @@
   'use strict';
 
   angular
-    .module('deck.controller', [])
+    .module('deck.controller', ['angularGrid'])
     .controller('DeckController', DeckController);
 
   DeckController.$inject = ['deckStorage'];
@@ -14,5 +14,6 @@
   function DeckController(deckStorage) {
     var vm = this;
     vm.deck = deckStorage.get();
+
   }
 })();
