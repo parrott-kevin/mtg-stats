@@ -6,7 +6,7 @@
   'use strict';
 
   angular
-    .module('deck.controller', ['angularGrid'])
+    .module('deck.controller', [])
     .controller('DeckController', DeckController);
 
   DeckController.$inject = ['deckStorage'];
