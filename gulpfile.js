@@ -1,7 +1,3 @@
-/**
- * Created by parrott-kevin on 1/6/15.
- */
-
 'use strict';
 
 var gulp = require('gulp');

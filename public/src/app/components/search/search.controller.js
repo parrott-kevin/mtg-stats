@@ -1,6 +1,3 @@
-/**
- * Created by parrott-kevin on 3/21/15.
- */
 (function() {
   'use strict';
   angular

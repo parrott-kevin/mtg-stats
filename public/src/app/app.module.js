@@ -1,6 +1,3 @@
-/**
- * Created by parrott-kevin on 1/6/15.
- */
 (function() {
   'use strict';
 
