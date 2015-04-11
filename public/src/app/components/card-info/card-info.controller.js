@@ -10,12 +10,13 @@
     'displayCard',
     'cardImage',
     'deckStorage',
+    'searchStorage',
     '_',
     '$routeParams',
     '$location'
   ];
 
-  function CardInfoController (fetchCard, displayCard, cardImage, deckStorage, _, $routeParams, $location) {
+  function CardInfoController (fetchCard, displayCard, cardImage, deckStorage, searchStorage, _, $routeParams, $location) {
     var vm = this;
     var id = $routeParams.id;
 
@@ -25,7 +26,7 @@
       vm.cardAttributes = displayCard.display(vm.cardInfo).cardAttributes;
     });
 
-    vm.setNameIdObj = angular.fromJson(sessionStorage.setNameIdObj);
+    vm.setNameIdObj = searchStorage.getSetNameId();
 
     vm.otherPrinting = function(printing) {
       var otherCardId = (_.find(vm.setNameIdObj, {Name: printing})).id;

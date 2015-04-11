@@ -5,24 +5,28 @@
     .module('home.controller', ['ui.bootstrap'])
     .controller('HomeController', HomeController);
 
-  HomeController.$inject = ['fetchCard', 'fetchSet', '_', '$location'];
+  HomeController.$inject = ['fetchCard', 'fetchSet', 'searchStorage', '_', '$location'];
 
-  function HomeController(fetchCard, fetchSet, _, $location) {
+  function HomeController(fetchCard, fetchSet, searchStorage, _, $location) {
     var vm = this;
     vm.card = null;
 
-    if (_.isUndefined(vm.cardNameIdSetObj)) {
+    if (_.isEmpty(searchStorage.getCardNameIdSet())) {
       fetchCard.getCardNameIdSet().then(function(d) {
-        sessionStorage.cardNameIdSetObj = angular.toJson(d.data);
-        vm.cardNameIdSetObj = angular.fromJson(sessionStorage.cardNameIdSetObj);
+        searchStorage.setCardNameIdSet(angular.fromJson(d.data));
+        vm.cardNameIdSetObj = searchStorage.getCardNameIdSet();
       });
+    } else {
+      vm.cardNameIdSetObj = searchStorage.getCardNameIdSet();
     }
 
-    if (_.isUndefined(vm.setNameIdObj)) {
+    if (_.isEmpty(searchStorage.getSetNameId())) {
       fetchSet.getSetNameId().then(function(d) {
-        sessionStorage.setNameIdObj = angular.toJson(d.data);
-        vm.setNameIdObj = angular.fromJson(sessionStorage.setNameIdObj);
+        searchStorage.setSetNameId(angular.fromJson(d.data));
+        vm.setNameIdObj = searchStorage.getSetNameId();
       });
+    } else {
+      vm.setNameIdObj = searchStorage.getSetNameId();
     }
 
     vm.submit = function() {

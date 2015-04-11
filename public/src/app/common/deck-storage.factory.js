@@ -9,25 +9,30 @@
 
   function deckStorage() {
     var deck = [];
+
     return {
-      add: function(card) {
-        var id = card.id;
-        var pos = deck.map(function(i) { return i.id; }).indexOf(id);
-        if (pos < 0) {
-          var obj = {
-            id: id,
-            card: card,
-            qty: 1
-          };
-          deck.push(obj);
-        } else {
-          deck[pos].qty += 1;
-        }
-      },
-      get: function() {
-        return deck;
-      }
+      add: add,
+      get: get
     };
+
+    function add(card) {
+      var id = card.id;
+      var pos = deck.map(function(i) { return i.id; }).indexOf(id);
+      if (pos < 0) {
+        var obj = {
+          id: id,
+          card: card,
+          qty: 1
+        };
+        deck.push(obj);
+      } else {
+        deck[pos].qty += 1;
+      }
+    }
+
+    function get() {
+      return deck;
+    }
 
   }
 })();

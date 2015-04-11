@@ -8,13 +8,16 @@
   cardImage.$inject = ['_'];
 
   function cardImage(_) {
+
     return {
-      link: function(multiverseId) {
-        if (!_.isNull(multiverseId)) {
-          return 'http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=' + multiverseId + '&type=card';
-        }
-      }
+      link: link
     };
+
+    function link(multiverseId) {
+      if (!_.isNull(multiverseId)) {
+        return 'http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=' + multiverseId + '&type=card';
+      }
+    }
   }
 
 })();
