@@ -16,4 +16,5 @@
       'deck-storage.factory',
       'search-storage.factory'
     ]);
+
 })();

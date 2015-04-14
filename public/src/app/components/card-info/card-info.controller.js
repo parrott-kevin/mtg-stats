@@ -19,14 +19,18 @@
   function CardInfoController (fetchCard, displayCard, cardImage, deckStorage, searchStorage, _, $routeParams, $location) {
     var vm = this;
     var id = $routeParams.id;
+    var cardNameIdSet = searchStorage.getCardNameIdSet();
 
     fetchCard.getCardInfo(id).then(function(d) {
       vm.cardInfo = angular.fromJson(d.data);
-      vm.imgsrc = cardImage.link(vm.cardInfo.MultiverseId);
+      if (vm.cardInfo.MultiverseId) {
+        vm.imgsrc = cardImage.link(vm.cardInfo.MultiverseId);
+      } else {
+        vm.imgsrc = cardImage.link(_.find(cardNameIdSet, {Name: vm.cardInfo.Name}).MultiverseId);
+      }
       vm.cardAttributes = displayCard.display(vm.cardInfo).cardAttributes;
     });
 
-    vm.setNameIdObj = searchStorage.getSetNameId();
 
     vm.otherPrinting = function(printing) {
       var otherCardId = (_.find(vm.setNameIdObj, {Name: printing})).id;

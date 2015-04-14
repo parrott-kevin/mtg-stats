@@ -7,12 +7,12 @@
   },
   "dependencies": {
     "bluebird": "2.4.2",
-    "body-parser": "^1.10.0",
-    "debug": "^2.1.1",
-    "express": "^4.10.6",
+    "body-parser": "~1.10.0",
+    "debug": "~2.1.1",
+    "express": "~4.10.6",
     "lodash": "~2.4.1",
     "mysql": "~2.5.0",
-    "sequelize": "^2.0.0"
+    "sequelize": "~2.0.0"
   },
   "description": "Application for searching cards, analyzing decks, and pricing trends",
   "main": "app.js",
