@@ -6,13 +6,16 @@
     .config(routeConfig);
 
   routeConfig.$inject = ['$routeProvider'];
-
   function routeConfig($routeProvider) {
     $routeProvider
       .when('/cardInfo/:id', {
         templateUrl: 'app/components/card-info/card-info.html',
         controller: 'CardInfoController',
-        controllerAs: 'vm'
+        controllerAs: 'vm',
+        resolve: {
+          cardNameIdSet: cardNameIdSet,
+          setNameId: setNameId
+        }
       })
       .when('/search/:name', {
         templateUrl: 'app/components/search/search.html',
@@ -27,6 +30,20 @@
       .otherwise({
         redirectTo: '/'
       });
+  }
+
+  cardNameIdSet.$inject = ['fetchCard'];
+  function cardNameIdSet(fetchCard) {
+    return fetchCard.getCardNameIdSet().then(function(d) {
+      return angular.fromJson(d.data);
+    });
+  }
+
+  setNameId.$inject = ['fetchSet'];
+  function setNameId(fetchSet) {
+    return fetchSet.getSetNameId().then(function(d) {
+      return angular.fromJson(d.data);
+    });
   }
 
 })();

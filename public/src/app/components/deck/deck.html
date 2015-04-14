@@ -1,5 +1,11 @@
 <div class="container">
   <div class="col-md-12" ng-repeat="card in vm.deck">
+    <div ng-switch="vm.cardType(card)">
+      <span ng-switch-when="Creature">Creature</span>
+      <span ng-switch-when="Enchantment">Enchantment</span>
+      <span ng-switch-when="Planeswalker">Planeswalker</span>
+      <span ng-switch-default>Other Spells</span>
+    </div>
     {{card.qty}} - <a ng-href="#/cardInfo/{{card.id}}">{{card.card.Name}}</a>
   </div>
 </div>

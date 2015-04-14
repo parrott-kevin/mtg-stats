@@ -15,7 +15,6 @@ var minifyCSS = require('gulp-minify-css');
 
 gulp.task('dev', [
   'clean:dist',
-  'less:css',
   'compress:css',
   'copy:fonts',
   'copy:html',

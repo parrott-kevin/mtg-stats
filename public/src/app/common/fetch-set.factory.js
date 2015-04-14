@@ -8,16 +8,16 @@
   fetchSet.$inject = ['$http'];
 
   function fetchSet($http) {
+
     return {
-      getSetNameId: function() {
-        return $http({
-          url: '/api/set/',
-          method: 'GET'
-        }).success(function(data) {
-          return data;
-        });
-      }
+      getSetNameId: getSetNameId
     };
+
+    function getSetNameId() {
+      return $http.get('/api/set/').success(function (data) {
+        return data;
+      });
+    }
   }
 
 })();

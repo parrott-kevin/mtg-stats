@@ -16,17 +16,20 @@
     };
 
     function add(card) {
-      var id = card.id;
-      var pos = deck.map(function(i) { return i.id; }).indexOf(id);
+      var pos = deck.map(function(i) {
+          return i.card.Name;
+        })
+        .indexOf(card.Name);
       if (pos < 0) {
         var obj = {
-          id: id,
           card: card,
           qty: 1
         };
         deck.push(obj);
       } else {
-        deck[pos].qty += 1;
+        if (deck[pos].qty < 4) {
+          deck[pos].qty += 1;
+        }
       }
     }
 

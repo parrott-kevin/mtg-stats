@@ -8,6 +8,7 @@
   fetchCard.$inject = ['$http'];
 
   function fetchCard($http) {
+
     return {
       getCardNameIdSet: getCardNameIdSet,
       getCardInfo: getCardInfo,
@@ -16,18 +17,13 @@
     };
 
     function getCardNameIdSet() {
-      return $http({
-        url: '/api/card/search',
-        method: 'GET'
-      }).success(function(data) {
+      return $http.get('/api/card/search').success(function(data) {
         return data;
       });
     }
 
     function getCardInfo(id) {
-      return $http({
-        url: '/api/card/info',
-        method: 'GET',
+      return $http.get('/api/card/info', {
         params: {
           id: id
         }
@@ -37,9 +33,7 @@
     }
 
     function getCardInfoBySet(name, setId) {
-      return $http({
-        url: '/api/card/info',
-        method: 'GET',
+      return $http.get('/api/card/info', {
         params: {
           name: name,
           setId: setId
@@ -50,9 +44,7 @@
     }
 
     function getCardPartial(name) {
-      return $http({
-        url: '/api/card/search',
-        method: 'GET',
+      return $http.get('/api/card/search', {
         params: {
           name: name
         }

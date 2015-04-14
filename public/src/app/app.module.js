@@ -13,7 +13,7 @@
       'display-card.factory',
       'card-image.factory',
       'lodash.factory',
-      'deck-storage.factory',
-      'search-storage.factory'
+      'deck-storage.factory'
     ]);
+
 })();
