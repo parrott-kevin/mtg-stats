@@ -5,20 +5,11 @@
     .module('deck.controller', [])
     .controller('DeckController', DeckController);
 
-  DeckController.$inject = ['deckStorage', '_'];
+  DeckController.$inject = ['deckStorage'];
 
-  function DeckController(deckStorage, _) {
+  function DeckController(deckStorage) {
     var vm = this;
     vm.deck = deckStorage.get();
-
-    vm.cardType = function(card) {
-      var types = _.trim(card.card.Type.split('\u2014')[0]).split(' ');
-      if (_.includes(types, 'Creature')) {
-        return 'Creature';
-      } else {
-        return types[0];
-      }
-    };
-
+    console.log(vm.deck);
   }
 })();

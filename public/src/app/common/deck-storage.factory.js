@@ -5,10 +5,17 @@
     .module('deck-storage.factory', [])
     .factory('deckStorage', deckStorage);
 
-  deckStorage.$inject = [];
+  deckStorage.$inject = ['cardType'];
 
-  function deckStorage() {
-    var deck = [];
+  function deckStorage(cardType) {
+    var deck = {
+      Land: [],
+      Creature: [],
+      Instant: [],
+      Sorcery: [],
+      Enchantment: [],
+      Other: []
+    };
 
     return {
       add: add,
@@ -16,7 +23,9 @@
     };
 
     function add(card) {
-      var pos = deck.map(function(i) {
+      var type = cardType.get(card);
+      var subDeck = deck[type];
+      var pos = subDeck.map(function(i) {
           return i.card.Name;
         })
         .indexOf(card.Name);
@@ -25,10 +34,10 @@
           card: card,
           qty: 1
         };
-        deck.push(obj);
+        subDeck.push(obj);
       } else {
-        if (deck[pos].qty < 4) {
-          deck[pos].qty += 1;
+        if (subDeck[pos].qty < 4) {
+          subDeck[pos].qty += 1;
         }
       }
     }
@@ -36,6 +45,7 @@
     function get() {
       return deck;
     }
+
 
   }
 })();

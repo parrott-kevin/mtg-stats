@@ -17,11 +17,6 @@ module.exports = {
           'Name',
           'MultiverseId'
         ],
-        where: {
-          MultiverseId: {
-            $not: null
-          }
-        },
         group: ['Name'],
         order: [
           Sequelize.fn('MAX', Sequelize.col('MultiverseId'))
