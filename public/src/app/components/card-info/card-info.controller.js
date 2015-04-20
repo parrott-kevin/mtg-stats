@@ -38,7 +38,7 @@
       });
     };
 
-    vm.addDeck = function(card) {
+    vm.addCard = function(card) {
       deckStorage.add(card);
     };
   }

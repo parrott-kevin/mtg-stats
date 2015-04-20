@@ -1,8 +1,14 @@
 <div class="container">
   <div class="row top-buffer" ng-repeat="card in vm.cards">
     <div class="col-md-3">
-      <a ng-href="#/cardInfo/{{card.id}}"><img ng-src="{{card.ImageLink}}" alt="{{card.Name}}"></a>
+      <div class="row">
+        <a ng-href="#/cardInfo/{{card.id}}"><img class="center-block" ng-src="{{card.ImageLink}}" alt="{{card.Name}}"></a>
+      </div>
+      <div class="top-buffer text-center">
+        <button ng-click="vm.addCard(card)" class="btn btn-default">Add to Deck</button>
+      </div>
     </div>
+
     <div class="col-md-5">
       <a ng-href="#/cardInfo/{{card.id}}"><h4>{{card.Name}}</h4></a>
       {{card.Text}}

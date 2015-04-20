@@ -10,6 +10,5 @@
   function DeckController(deckStorage) {
     var vm = this;
     vm.deck = deckStorage.get();
-    console.log(vm.deck);
   }
 })();
