@@ -5,31 +5,29 @@
     .controller('SearchController', SearchController);
 
   SearchController.$inject = [
-    'fetchCard',
     'cardImage',
     'deckStorage',
-    '_',
-    '$routeParams'
+    'cardSearch',
+    '_'
   ];
 
-  function SearchController(fetchCard, cardImage, deckStorage, _, $routeParams) {
+  function SearchController(cardImage, deckStorage, cardSearch, _) {
     var vm = this;
-    var name = $routeParams.name;
 
-    fetchCard.getCardPartial(name).then(function(d) {
-      searchResults(angular.fromJson(d.data));
-    });
+    vm.cards = searchResults(cardSearch);
 
     vm.addCard = function(card) {
       deckStorage.add(card);
     };
 
     function searchResults(data) {
-      vm.cards = _.sortBy(data.rows, 'Name');
+      var cards = _.sortBy(data.rows, 'Name');
 
-      _.forEach(vm.cards, function(card) {
+      _.forEach(cards, function(card) {
         card.ImageLink = cardImage.link(card.MultiverseId);
       });
+
+      return cards;
     }
 
   }

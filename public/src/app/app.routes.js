@@ -20,7 +20,10 @@
       .when('/search/:name', {
         templateUrl: 'app/components/search/search.html',
         controller: 'SearchController',
-        controllerAs: 'vm'
+        controllerAs: 'vm',
+        resolve: {
+          cardSearch: cardSearch
+        }
       })
       .when('/deck', {
         templateUrl: 'app/components/deck/deck.html',
@@ -42,6 +45,14 @@
   setNameId.$inject = ['fetchSet'];
   function setNameId(fetchSet) {
     return fetchSet.getSetNameId().then(function(d) {
+      return angular.fromJson(d.data);
+    });
+  }
+
+  cardSearch.$inject = ['$route', 'fetchCard'];
+  function cardSearch($route, fetchCard) {
+    var name = $route.current.params.name;
+    return fetchCard.getCardPartial(name).then(function(d) {
       return angular.fromJson(d.data);
     });
   }
